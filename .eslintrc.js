@@ -70,5 +70,13 @@ module.exports = {
     'react/destructuring-assignment': 'error',
     'react/boolean-prop-naming': 'error',
     'compat/compat': 'error',
+    'no-restricted-syntax': [
+      'error',
+      {
+        message:
+          'JSON.stringify will fail with circular references, errors and undefined. Try a safer method such as convertToString from helpers.',
+        selector: 'MemberExpression > Identifier[name="stringify"]',
+      },
+    ],
   },
 }
