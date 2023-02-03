@@ -8,7 +8,6 @@
     ]
   },
   "devDependencies": {
-    "@aoberoi/chokidar-cli": "2.0.0",
     "@redwoodjs/core": "3.5.0",
     "execa": "5.1.1",
     "prettier-plugin-prisma": "4.2.0",
@@ -28,8 +27,5 @@
     "@will-ks/helpers": "1.0.1",
     "axios": "1.2.1",
     "p-queue": "6.6.2"
-  },
-  "scripts": {
-    "start-worker": "yarn chokidar 'packages/**/*.ts' 'scripts/**/*.ts' 'api/**/*.ts' --initial -c 'rw exec runWorker'"
   }
 }
