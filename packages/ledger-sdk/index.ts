@@ -1,9 +1,8 @@
 import pipeNow from '@arrows/composition/pipeNow'
-import { getApiClient } from '@will-ks/helpers'
-import axios, { AxiosError } from 'axios'
+import { ApiError, getApiClient } from '@will-ks/helpers'
 import { AssetName, COMPANY_ACCOUNT_NAME, LEDGER_NAME } from 'shared-data/src'
 
-export type TransferPosting = {
+type TransferPosting = {
   fromAccountId: string
   toAccountId: string
   tokensQuantity: number
@@ -14,55 +13,42 @@ export enum LedgerErrorCode {
   Validation = 'VALIDATION',
 }
 
-export interface ILedgerError {
-  response: {
-    data: {
-      error_code: LedgerErrorCode | string
-      error_message: string
-    }
+type LedgerErrorResponse = {
+  data: {
+    error_code: LedgerErrorCode | string
+    error_message: string
   }
 }
 
-const isLedgerServerError = (toCheck: unknown): toCheck is ILedgerError => {
-  return axios.isAxiosError(toCheck) && !!toCheck.response?.data?.error_code
+const isLedgerErrorResponse = (
+  toCheck: unknown
+): toCheck is LedgerErrorResponse => {
+  return !!(toCheck as LedgerErrorResponse)?.data?.error_code
 }
 
-export class LedgerApiError extends Error {
-  axiosError: AxiosError
+export class LedgerApiError extends ApiError {
+  apiError: ApiError
   name = 'LedgerError'
-  isServerProvidedError?: boolean
-  isNetworkError?: boolean
-  isServerError?: boolean
-  statusCode?: number
   errorCode?: LedgerErrorCode | string
   errorMessage?: string
 
-  constructor(error: AxiosError) {
-    super()
-    this.axiosError = error
-    const { response, request, stack, config } = error
-
-    this.isServerProvidedError = response && true // client received an error response (5xx, 4xx)
-    this.isNetworkError = request && !response // client never received a response, or request never left
-    this.stack = stack
-    this.statusCode = response?.status
-    this.isServerError = this.statusCode ? this.statusCode >= 500 : undefined
-    this.errorCode = isLedgerServerError(error)
-      ? error.response.data.error_code
+  constructor(error: ApiError) {
+    super(error.axiosError)
+    this.apiError = error
+    const { response } = error.axiosError
+    this.errorCode = isLedgerErrorResponse(response)
+      ? response.data.error_code
       : undefined
-    this.errorMessage = isLedgerServerError(error)
-      ? error.response.data.error_message
+    this.errorMessage = isLedgerErrorResponse(response)
+      ? response.data.error_message
       : undefined
-    this.message = `${response?.status || 'Network error'} at ${
-      config?.url ?? 'unknown url'
-    } ${JSON.stringify(this.errorCode ?? this.axiosError)}`
   }
 }
 
 export class LedgerApiInsufficientBalanceError extends LedgerApiError {
   errorCode = LedgerErrorCode.InsufficientFunds
 
-  constructor(error: AxiosError) {
+  constructor(error: ApiError) {
     super(error)
   }
 }
@@ -74,10 +60,10 @@ export const ledger = pipeNow(
       baseURL: 'http://127.0.0.1:3068',
     },
     logger: console,
-    transformError: (axiosError) => {
-      const ledgerError = new LedgerApiError(axiosError)
+    transformError: (apiError) => {
+      const ledgerError = new LedgerApiError(apiError)
       return ledgerError.errorCode === LedgerErrorCode.InsufficientFunds
-        ? new LedgerApiInsufficientBalanceError(axiosError)
+        ? new LedgerApiInsufficientBalanceError(apiError)
         : ledgerError
     },
   }),
