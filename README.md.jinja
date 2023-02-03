@@ -1,0 +1,70 @@
+# {{project_name}}
+
+## Introduction
+
+This is a monorepo setup using [yarn workspaces](https://classic.yarnpkg.com/lang/en/docs/workspaces/).
+
+We build upon the [RedwoodJS framework](https://redwoodjs.com/), which is a full stack TypeScript framework.
+
+Redwood is a highly opinionated framework, and we try to stick to Redwood's conventions as much as possible. This means that usually, if you're not sure how something works or why something is the way it is, your first port of call for finding the answer should be [the Redwood documentation](https://redwoodjs.com/docs/introduction). They also have an active forum and a Discord, which are great for getting questions answered.
+
+It is **highly** recommended that any new developers to the project start by completing the [Redwood Tutorial](https://redwoodjs.com/docs/quick-start). This will ensure they are on the same page and understand how the different parts of the project fit together.
+
+## Codebase structure
+
+This is a yarn monorepo containing seperate packages:
+```
+/ web - React frontend
+/ api - Node backend
+/ packages
+  / * - Independent packages
+/ scripts - Node scripts
+/ docs - Documentation
+```
+
+Each package has it's own README.md.
+
+## Getting started
+
+### Prerequisites
+Redwood requires [Node.js](https://nodejs.org/en/) (>=14.19.x <=16.x) and [Yarn](https://yarnpkg.com/) (>=1.15)
+
+### Setup
+1. Start by installing dependencies: `yarn install`
+2. Create a `.env` file in the monorepo root, following the template in `.env.example`.
+3. Start the development server: `yarn dev`
+
+### Styles & Linting
+
+- We use ESLint, which is configured on a global level for the entire repo in `.eslintrc.js`. Most linting problems will cause an error in compilation, so we ensure consistency.
+
+- The general TypeScript compiler options are set up in `tsconfig.json`, and individual packages have their own configs that extend from this.
+
+- To ensure a consistent style and prevent unnecessary diffs, we use Prettier to format _all_ files (`{**/*,*}.{*}`).
+  You should set up your IDE to format with Prettier and optimize imports on save (or [pre-commit](https://create-react-app.dev/docs/setting-up-your-editor#formatting-code-automatically) if you prefer).
+
+Recommended that you install these IDE plugins / extensions:
+
+```
+VS Code:
+- Prettier
+- ESLint
+
+Webstorm:
+- Prettier
+- Save Actions
+```
+
+### Tests
+
+We use Redwood's testing framework, which itself uses Jest and React-testing-library.
+
+To run the tests, run
+
+```
+yarn test
+```
+
+You should run the tests locally before submitting a PR, and when you open a PR, Github's actions will run the tests again.
+
+
