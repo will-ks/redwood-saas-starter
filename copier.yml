@@ -2,3 +2,11 @@
 project_name:
   type: str
   help: What is your project name?
+
+_exclude:
+  - "copier.yaml"
+  - "copier.yml"
+  - ".git"
+  - "package.json"
+  - ".idea/redwood-saas-starter.iml"
+  - ".idea/modules.xml"
