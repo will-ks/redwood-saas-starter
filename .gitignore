@@ -1,5 +1,3 @@
-.idea
-.DS_Store
 .env
 .netlify
 .redwood
@@ -19,5 +17,7 @@ api/src/lib/generateGraphiQLHeader.*
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+.idea/redwood-saas-starter.iml
+.idea/modules.xml
 
 
