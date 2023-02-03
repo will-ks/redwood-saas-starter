@@ -1,6 +1,7 @@
 // See https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/constructor
 // for options.
 
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { PrismaClient } from '@prisma/client'
 
 import { emitLogLevels, handlePrismaLogging } from '@redwoodjs/api/logger'

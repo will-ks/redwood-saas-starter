@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/no-process-exit */
 import express from 'express'
 import { getWorker } from './helpers/worker-helpers'
 
@@ -63,7 +64,7 @@ const app = express()
 
 ;(async () => {
   const worker = await getWorker({})
-  app.get('/status', function (req, res) {
+  app.get('/status', (req, res) => {
     res.send(worker.getState())
   })
   app.listen(3001)

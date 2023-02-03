@@ -24,14 +24,15 @@ const { transferTokensBetweenUsers } = proxyActivities<typeof activities>({
   },
 })
 
-export type ExampleArgs = {
-  id: string
-}
-
-export async function Example({ id }: ExampleArgs) {
+export async function Example() {
   let workflowStatus = ExampleWorkflowStatus.Initializing
   try {
     setHandler(getStatusQuery, () => workflowStatus)
+    await transferTokensBetweenUsers({
+      fromUserId: '',
+      tokensQuantity: 10,
+      toUserId: '',
+    })
     setHandler(exampleSignal, () => {})
   } finally {
     workflowStatus = ExampleWorkflowStatus.Ending

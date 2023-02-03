@@ -15,7 +15,12 @@
   },
   "devDependencies": {
     "@redwoodjs/core": "3.5.0",
-    "prettier-plugin-prisma": "4.2.0"
+    "eslint-plugin-compat": "4.0.1",
+    "eslint-plugin-no-unsanitized": "4.0.1",
+    "eslint-plugin-security": "1.4.0",
+    "eslint-plugin-unicorn": "40.1.0",
+    "prettier-plugin-prisma": "4.2.0",
+    "type-flag": "3.0.0"
   },
   "engines": {
     "node": ">=14.19 <=16.x",
@@ -24,5 +29,11 @@
   "prisma": {
     "seed": "yarn rw exec seed"
   },
-  "packageManager": "yarn@3.2.1"
+  "packageManager": "yarn@3.2.1",
+  "browserslist": [
+    "last 2 Chrome major versions",
+    "last 2 Edge major versions",
+    "last 2 Safari major versions",
+    "last 2 iOS major versions"
+  ]
 }

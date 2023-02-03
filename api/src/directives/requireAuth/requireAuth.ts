@@ -1,4 +1,5 @@
 import { createValidatorDirective } from '@redwoodjs/graphql-server'
+// eslint-disable-next-line import/no-extraneous-dependencies
 import gql from 'graphql-tag'
 
 import { requireAuth as applicationRequireAuth } from 'src/lib/auth'

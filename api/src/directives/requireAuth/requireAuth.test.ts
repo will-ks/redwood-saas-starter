@@ -1,4 +1,5 @@
-import { mockRedwoodDirective, getDirectiveName } from '@redwoodjs/testing/api'
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { getDirectiveName, mockRedwoodDirective } from '@redwoodjs/testing/api'
 
 import requireAuth from './requireAuth'
 

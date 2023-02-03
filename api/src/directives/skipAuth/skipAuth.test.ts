@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { getDirectiveName } from '@redwoodjs/testing/api'
 
 import skipAuth from './skipAuth'

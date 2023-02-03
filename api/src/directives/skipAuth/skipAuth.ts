@@ -1,6 +1,7 @@
-import gql from 'graphql-tag'
-
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { createValidatorDirective } from '@redwoodjs/graphql-server'
+// eslint-disable-next-line import/no-extraneous-dependencies
+import gql from 'graphql-tag'
 
 export const schema = gql`
   """

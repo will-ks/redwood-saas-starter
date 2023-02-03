@@ -28,7 +28,7 @@ const isLedgerErrorResponse = (
 
 export class LedgerApiError extends ApiError {
   apiError: ApiError
-  name = 'LedgerError'
+  name = 'LedgerApiError'
   errorCode?: LedgerErrorCode | string
   errorMessage?: string
 
@@ -47,6 +47,7 @@ export class LedgerApiError extends ApiError {
 
 export class LedgerApiInsufficientBalanceError extends LedgerApiError {
   errorCode = LedgerErrorCode.InsufficientFunds
+  name = 'LedgerApiInsufficientBalanceError'
 
   constructor(error: ApiError) {
     super(error)

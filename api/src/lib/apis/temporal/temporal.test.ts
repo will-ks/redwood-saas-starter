@@ -27,7 +27,7 @@ const stopTestDependencies = async () => {
           return false
         },
         interval: 500,
-        maxRetries: Infinity,
+        maxRetries: Number.POSITIVE_INFINITY,
         backoff: false,
         timeout: 10_000,
         timeoutMessage: 'Timed out waiting for worker to be killed',
@@ -71,7 +71,7 @@ const startTestDependencies = async () => {
         return true
       },
       interval: 500,
-      maxRetries: Infinity,
+      maxRetries: Number.POSITIVE_INFINITY,
       backoff: false,
       timeout: 10_000,
       timeoutMessage: 'Timed out waiting for worker to be ready',
