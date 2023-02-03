@@ -1,0 +1,17 @@
+import { FC } from 'react';
+import { MetaTags } from '@redwoodjs/web'
+
+const ${pascalName}Page: FC<% if (paramName !== '') { %><{ ${paramName}: ${paramType} }><% } %> = () => {
+  return (
+    <>
+      <MetaTags title="${pascalName}" description="${pascalName} page" />
+
+      <h1>${pascalName}Page</h1>
+      <p>
+        Find me in <code>${outputPath}</code>.
+      </p>
+    </>
+  )
+}
+
+export default ${pascalName}Page

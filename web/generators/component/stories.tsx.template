@@ -1,0 +1,12 @@
+import type { ComponentStory } from '@storybook/react'
+import { mockProps } from './${pascalName}.test'
+import ${pascalName} from './${pascalName}'
+
+export const generated: ComponentStory<typeof ${pascalName}> = (args) => {
+  return <${pascalName} {...mockProps(args)} />
+}
+
+export default {
+  title: 'Components/' + ${pascalName}.name,
+  component: ${pascalName},
+}

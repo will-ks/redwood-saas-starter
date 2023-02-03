@@ -1,0 +1,35 @@
+{
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "api",
+      "web",
+      "packages/*"
+    ]
+  },
+  "devDependencies": {
+    "@aoberoi/chokidar-cli": "2.0.0",
+    "@redwoodjs/core": "3.5.0",
+    "execa": "5.1.1",
+    "prettier-plugin-prisma": "4.2.0",
+    "type-flag": "3.0.0"
+  },
+  "engines": {
+    "node": ">=14.19 <=16.x",
+    "yarn": ">=1.15"
+  },
+  "prisma": {
+    "seed": "yarn rw exec seed"
+  },
+  "packageManager": "yarn@3.2.1",
+  "dependencies": {
+    "@arrows/composition": "1.2.2",
+    "@temporalio/client": "1.5.2",
+    "@will-ks/helpers": "1.0.1",
+    "axios": "1.2.1",
+    "p-queue": "6.6.2"
+  },
+  "scripts": {
+    "start-worker": "yarn chokidar 'packages/**/*.ts' 'scripts/**/*.ts' 'api/**/*.ts' --initial -c 'rw exec runWorker'"
+  }
+}

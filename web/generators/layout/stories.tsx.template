@@ -1,0 +1,12 @@
+import type { ComponentStory } from '@storybook/react'
+import { mockProps } from './${singularPascalName}Layout.test'
+import ${singularPascalName}Layout from './${singularPascalName}Layout'
+
+export const generated: ComponentStory<typeof ${singularPascalName}Layout> = (args) => {
+  return <${singularPascalName}Layout {...mockProps(args)} />
+}
+
+export default {
+  title: 'Layouts/' + ${singularPascalName}Layout.name,
+  component: ${singularPascalName}Layout,
+}

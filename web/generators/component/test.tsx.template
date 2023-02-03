@@ -1,0 +1,16 @@
+import { render } from '@redwoodjs/testing/web'
+import { getPropsMocker } from 'src/lib/mock-data'
+
+import ${pascalName} from './${pascalName}'
+
+export const mockProps = getPropsMocker({
+  // Add props not covered by included in mock defaults here
+})
+
+describe(${pascalName}.name, () => {
+  it('renders successfully', () => {
+    expect(() => {
+      render(<${pascalName} {...mockProps()} />)
+    }).not.toThrow()
+  })
+})

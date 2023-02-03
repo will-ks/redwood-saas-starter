@@ -1,0 +1,17 @@
+{
+  "name": "temporal-worker",
+  "packageManager": "yarn@3.2.1",
+  "dependencies": {
+    "@temporalio/activity": "1.5.2",
+    "@temporalio/worker": "1.5.2",
+    "@temporalio/workflow": "1.5.2",
+    "date-fns": "2.29.3",
+    "express": "4.18.2"
+  },
+  "scripts": {
+    "start": "yarn tsx src/main.ts"
+  },
+  "devDependencies": {
+    "tsx": "3.12.2"
+  }
+}

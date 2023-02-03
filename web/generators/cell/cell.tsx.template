@@ -1,0 +1,27 @@
+import { FC } from 'react';
+import type { ${pascalName}Query, ${pascalName}QueryVariables } from 'types/graphql'
+import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+
+export const QUERY = gql`
+  query ${pascalName}Query($id: ${idType}!) {
+    ${camelName}: ${camelName}(id: $id) {
+      id
+    }
+  }
+`
+
+export const Loading: FC = () => <div>Loading...</div>
+
+export const Empty: FC = () => <div>Empty</div>
+
+export const Failure: FC<CellFailureProps<${pascalName}QueryVariables>> = ({
+  error,
+}) => (
+  <div style={{ color: 'red' }}>Error: {error?.message}</div>
+)
+
+export const Success: FC<CellSuccessProps<${pascalName}Query, ${pascalName}QueryVariables>> = ({
+  ${camelName},
+}) => {
+  return <div>{JSON.stringify(${camelName})}</div>
+}
