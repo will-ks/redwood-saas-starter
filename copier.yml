@@ -11,3 +11,4 @@ _exclude:
   - ".idea/redwood-saas-starter.iml"
   - ".idea/modules.xml"
   - "yarn.lock"
+  - "api/db/migrations"
