@@ -7506,14 +7506,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@will-ks/helpers@npm:1.0.1":
-  version: 1.0.1
-  resolution: "@will-ks/helpers@npm:1.0.1"
+"@will-ks/helpers@npm:1.1.3":
+  version: 1.1.3
+  resolution: "@will-ks/helpers@npm:1.1.3"
   dependencies:
     "@arrows/composition": ^1.2.2
     axios: ^1.2.1
     qs: ^6.11.0
-  checksum: 1e04aa06f5ccc6d58859e769eb878323a12d03639633b99972d44d619cb271087191283fad9df0f58cda4a51d814106eecec825e670081526a123ff321cb5bf8
+  checksum: 118fd90145b6ac37f7e3fda197e4a32f8af3d0d74e50a2e935dc9440bf858caad3de2bfef9cb1d95f90f953d888ca0b476cef1d36a4f1588309465ee895dc5df
   languageName: node
   linkType: hard
 
@@ -7954,9 +7954,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "api@workspace:api"
   dependencies:
+    "@arrows/composition": 1.2.2
     "@redwoodjs/api": 3.5.0
     "@redwoodjs/graphql-server": 3.5.0
     "@temporalio/client": 1.5.2
+    "@will-ks/helpers": 1.1.3
+    axios: 1.3.2
+    execa: 5.1.1
   languageName: unknown
   linkType: soft
 
@@ -8418,14 +8422,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:1.2.1":
-  version: 1.2.1
-  resolution: "axios@npm:1.2.1"
+"axios@npm:1.3.2":
+  version: 1.3.2
+  resolution: "axios@npm:1.3.2"
   dependencies:
     follow-redirects: ^1.15.0
     form-data: ^4.0.0
     proxy-from-env: ^1.1.0
-  checksum: 8c5d97bd149e1642ef2149fbcaf307227c6a6ffe14d74187193f3657286ee3f987c25aab8526a7c4701419cae5fae84785d819e86481c502b309ca8369c97fc9
+  checksum: 163f4b41e7a447b17aa131cd915aea0cf35aa00eb62531292c66359436dc16eef82cab64a5dc2cafcb612744b34789fa84615031cd06a55ac982e7add14e4468
   languageName: node
   linkType: hard
 
@@ -16921,6 +16925,9 @@ __metadata:
 "ledger-sdk@workspace:packages/ledger-sdk":
   version: 0.0.0-use.local
   resolution: "ledger-sdk@workspace:packages/ledger-sdk"
+  dependencies:
+    "@arrows/composition": 1.2.2
+    "@will-ks/helpers": 1.1.3
   languageName: unknown
   linkType: soft
 
@@ -20877,13 +20884,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "redwood-saas-starter@workspace:."
   dependencies:
-    "@arrows/composition": 1.2.2
     "@redwoodjs/core": 3.5.0
-    "@will-ks/helpers": 1.0.1
-    axios: 1.2.1
-    execa: 5.1.1
     prettier-plugin-prisma: 4.2.0
-    type-flag: 3.0.0
   languageName: unknown
   linkType: soft
 
@@ -22983,6 +22985,7 @@ __metadata:
   resolution: "temporal-worker@workspace:packages/temporal-worker"
   dependencies:
     "@temporalio/activity": 1.5.2
+    "@temporalio/client": 1.5.2
     "@temporalio/worker": 1.5.2
     "@temporalio/workflow": 1.5.2
     date-fns: 2.29.3
@@ -23622,13 +23625,6 @@ __metadata:
   version: 2.19.0
   resolution: "type-fest@npm:2.19.0"
   checksum: a5a7ecf2e654251613218c215c7493574594951c08e52ab9881c9df6a6da0aeca7528c213c622bc374b4e0cb5c443aa3ab758da4e3c959783ce884c3194e12cb
-  languageName: node
-  linkType: hard
-
-"type-flag@npm:3.0.0":
-  version: 3.0.0
-  resolution: "type-flag@npm:3.0.0"
-  checksum: b1015d4eb18cd85432fa3bcd0228149dd6893a9c1360a2ad619f79b72e19acfb648a932e2a9ccf2e2db0f0c4b86385bd886a3364e221afb116424e0ae6d1b1ba
   languageName: node
   linkType: hard
 
@@ -24480,6 +24476,7 @@ __metadata:
     "@redwoodjs/forms": 3.5.0
     "@redwoodjs/router": 3.5.0
     "@redwoodjs/web": 3.5.0
+    "@will-ks/helpers": 1.1.3
     prop-types: 15.8.1
     react: 17.0.2
     react-dom: 17.0.2

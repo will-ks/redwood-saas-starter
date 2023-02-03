@@ -1,4 +1,8 @@
 {
   "name": "ledger-sdk",
-  "packageManager": "yarn@3.2.1"
+  "packageManager": "yarn@3.2.1",
+  "dependencies": {
+    "@arrows/composition": "1.2.2",
+    "@will-ks/helpers": "1.1.3"
+  }
 }
