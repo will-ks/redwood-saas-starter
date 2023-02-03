@@ -1,12 +1,19 @@
 import { assertAndReturn } from '@will-ks/helpers'
 
-export const secrets = {
-  example: {
-    key: assertAndReturn(process.env.EXAMPLE_KEY),
+const apiConfig = {
+  secrets: {
+    example: {
+      key: assertAndReturn(process.env.EXAMPLE_KEY, 'process.env.EXAMPLE_KEY'),
+    },
+  },
+  constants: {
+    example: {
+      name: assertAndReturn(
+        process.env.EXAMPLE_NAME,
+        'process.env.EXAMPLE_NAME'
+      ),
+    },
   },
 }
-export const constants = {
-  example: {
-    name: assertAndReturn(process.env.EXAMPLE_NAME),
-  },
-}
+
+export default apiConfig
