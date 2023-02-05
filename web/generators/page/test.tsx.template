@@ -1,5 +1,5 @@
 import { render } from '@redwoodjs/testing/web'
-import { getPropsMocker } from 'src/lib/mock-data'
+import { getPropsMocker } from 'src/lib/mock-helpers'
 
 import ${pascalName}Page from './${pascalName}Page'
 
