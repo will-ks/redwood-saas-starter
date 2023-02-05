@@ -1,6 +1,6 @@
 // redwood-app/.eslintrc.js
 module.exports = {
-  plugins: ['security', 'unicorn', 'compat'],
+  plugins: ['security', 'unicorn'],
   extends: [
     '@redwoodjs/eslint-config',
     'plugin:security/recommended',
@@ -69,7 +69,6 @@ module.exports = {
     'react/self-closing-comp': 'error',
     'react/destructuring-assignment': 'error',
     'react/boolean-prop-naming': 'error',
-    'compat/compat': 'error',
     'no-restricted-syntax': [
       'error',
       {

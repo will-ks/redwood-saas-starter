@@ -25070,6 +25070,8 @@ __metadata:
     prop-types: 15.8.1
     react: 17.0.2
     react-dom: 17.0.2
+  peerDependencies:
+    "@redwoodjs/testing": "*"
   languageName: unknown
   linkType: soft
 
