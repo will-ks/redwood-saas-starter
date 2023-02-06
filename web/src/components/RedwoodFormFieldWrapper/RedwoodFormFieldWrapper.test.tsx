@@ -19,6 +19,7 @@ import RedwoodFormFieldWrapper from './RedwoodFormFieldWrapper'
 
 export const mockProps = getPropsMocker({
   // Add props not covered by included in mock defaults here
+  defaultValue: '',
 })
 
 const mantineFormElements: ReactElement[] = [
