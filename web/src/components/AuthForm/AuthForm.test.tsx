@@ -1,16 +1,20 @@
 import { render } from '@redwoodjs/testing/web'
 import { getPropsMocker } from 'src/lib/mock-helpers'
+import { AuthPageMode } from 'src/pages/AuthPage/AuthPage'
 
-import ${pascalName}Page from './${pascalName}Page'
+import AuthForm from './AuthForm'
 
 export const mockProps = getPropsMocker({
   // Add props not covered by included in mock defaults here
+  mode: AuthPageMode.Login,
+  loginPageRoute: 'auth/login',
+  forgotPasswordPageRoute: 'auth/forgot-password',
 })
 
-describe(${pascalName}Page.name, () => {
+describe(AuthForm.name, () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<${pascalName}Page {...mockProps()} ${propValueParam} />)
+      render(<AuthForm {...mockProps()} />)
     }).not.toThrow()
   })
 })

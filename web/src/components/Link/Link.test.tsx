@@ -1,16 +1,17 @@
 import { render } from '@redwoodjs/testing/web'
 import { getPropsMocker } from 'src/lib/mock-helpers'
 
-import ${pascalName}Page from './${pascalName}Page'
+import Link from './Link'
 
 export const mockProps = getPropsMocker({
   // Add props not covered by included in mock defaults here
+  children: 'Click me',
 })
 
-describe(${pascalName}Page.name, () => {
+describe(Link.name, () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<${pascalName}Page {...mockProps()} ${propValueParam} />)
+      render(<Link {...mockProps()} />)
     }).not.toThrow()
   })
 })
