@@ -1,6 +1,11 @@
-import * as React from 'react'
 import { MantineProvider } from '@mantine/core'
 import * as theme from 'config/mantine.config'
+import * as React from 'react'
+
+// Mock Jest methods, since we import mock data from a test file
+window.describe = () => {}
+window.test = () => {}
+
 /** @type { import("@storybook/csf").GlobalTypes } */
 export const globalTypes = {}
 /**
