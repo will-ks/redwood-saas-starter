@@ -13,7 +13,8 @@ const Routes = () => {
   return (
     <Router>
       <Route path="/auth/{mode}" page={AuthPage} name="auth" />
-      <Route notfound page={NotFoundPage} prerender />
+      {/*Note: NotFoundPage is always prerendered*/}
+      <Route notfound page={NotFoundPage} />
     </Router>
   )
 }
