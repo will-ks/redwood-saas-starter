@@ -15,10 +15,12 @@
   "devDependencies": {
     "@emotion/react": "11.10.5",
     "@mantine/core": "5.10.3",
-    "@mantine/hooks": "5.10.3"
+    "@mantine/hooks": "5.10.3",
+    "vite-plugin-checker": "0.5.5"
   },
   "peerDependencies": {
-    "@redwoodjs/testing": "*"
+    "@redwoodjs/testing": "*",
+    "vite": "*"
   },
   "browserslist": [
     "last 2 Chrome major versions",
