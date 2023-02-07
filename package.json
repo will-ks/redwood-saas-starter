@@ -10,6 +10,7 @@
   },
   "scripts": {
     "dev": "yarn check-env && rw prisma migrate dev && rw dev",
+    "build": "yarn check-env && yarn rw build",
     "test": "yarn rw test",
     "check-env": "rw exec check-env",
     "pre-deploy": "yarn check-env",
