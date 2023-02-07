@@ -11,6 +11,9 @@ module.exports = {
     node: true,
   },
   root: true,
+  parserOptions: {
+    project: ['tsconfig.json'],
+  },
   rules: {
     // Override extended configs - Should have justification
     'import/order': 'off', // Conflicts with Webstorm's optimize imports
@@ -77,5 +80,6 @@ module.exports = {
         selector: 'MemberExpression > Identifier[name="stringify"]',
       },
     ],
+    '@typescript-eslint/switch-exhaustiveness-check': 'error',
   },
 }

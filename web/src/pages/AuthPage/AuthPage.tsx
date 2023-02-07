@@ -10,6 +10,7 @@ export enum AuthPageMode {
   SignUp = 'signup',
   Login = 'login',
   ForgotPassword = 'forgot-password',
+  ChangePassword = 'change-password',
 }
 
 const isAuthPageMode = getEnumTypeGuard(AuthPageMode)
@@ -32,6 +33,8 @@ const AuthPage: FC<{
               return 'Create an account'
             case AuthPageMode.ForgotPassword:
               return 'Forgot your password?'
+            case AuthPageMode.ChangePassword:
+              return 'Change password'
           }
         })()}
       </Title>
@@ -64,6 +67,8 @@ const AuthPage: FC<{
               )
             case AuthPageMode.ForgotPassword:
               return 'Enter your email to get a reset link'
+            case AuthPageMode.ChangePassword:
+              return 'Choose a new password for your account'
           }
         })()}
       </Text>
