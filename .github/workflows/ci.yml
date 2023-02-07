@@ -26,6 +26,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
       # install all the dependencies
       - run: yarn install
+      # Lint
+      - run: yarn lint
       # build the redwood app
       - run: yarn build
       # run the api tests

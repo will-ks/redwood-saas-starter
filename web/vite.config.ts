@@ -19,6 +19,7 @@ const viteConfig: UserConfig = {
   plugins: [
     redwood(),
     checker({
+      enableBuild: false,
       // e.g. use TypeScript check
       typescript: true,
       eslint: {
