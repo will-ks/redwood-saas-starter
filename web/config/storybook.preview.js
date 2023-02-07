@@ -1,5 +1,4 @@
 import { MantineProvider } from '@mantine/core'
-import * as theme from 'config/mantine.config'
 import * as React from 'react'
 
 // Mock Jest methods, since we import mock data from a test file
@@ -19,7 +18,7 @@ const _exampleDecorator = (StoryFn, _context) => {
 }
 const withMantine = (StoryFn) => {
   return (
-    <MantineProvider theme={theme}>
+    <MantineProvider theme={{}}>
       <StoryFn />
     </MantineProvider>
   )
