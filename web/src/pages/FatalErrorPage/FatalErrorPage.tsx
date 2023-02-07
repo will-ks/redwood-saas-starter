@@ -15,6 +15,7 @@ import FatalErrorDisplay, {
 let RedwoodDevFatalErrorPage = undefined
 if (process.env.NODE_ENV === 'development') {
   RedwoodDevFatalErrorPage =
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     require('@redwoodjs/web/dist/components/DevFatalErrorPage').DevFatalErrorPage
 }
 

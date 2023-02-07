@@ -5,6 +5,7 @@ module.exports = {
     '@redwoodjs/eslint-config',
     'plugin:security/recommended',
     'plugin:no-unsanitized/DOM',
+    'plugin:@typescript-eslint/recommended',
   ],
   env: {
     browser: true,
@@ -14,14 +15,23 @@ module.exports = {
   parserOptions: {
     project: ['tsconfig.json'],
   },
+  ignorePatterns: [
+    '.eslintrc.js',
+    '**.config.js',
+    'entry-client.jsx',
+    '**/public/*',
+    '**/dist',
+  ],
   rules: {
     // Override extended configs - Should have justification
     'import/order': 'off', // Conflicts with Webstorm's optimize imports
     'prettier/prettier': 'off', // Handled by IDE
     '@typescript-eslint/no-unused-vars': 'off', // Handled by IDE
-    '@typescript-eslint/no-non-null-assertion': 'off', // Occasionally useful to be able to do this
+    '@typescript-eslint/no-non-null-assertion': 'off', // Useful to be able to do this
     'react/prop-types': 'off', // False positives, handled by TS
-    'security/detect-object-injection': 'off', // Too many false positives
+    'security/detect-object-injection': 'off', // Too many false positives,
+    '@typescript-eslint/no-empty-function': 'off', // Useful to be able to do this
+    '@typescript-eslint/explicit-module-boundary-types': 'off', // Type inferrence is better
     // Additional rules
     'import/no-extraneous-dependencies': ['error', {}],
     'no-var': 'error',
@@ -80,6 +90,5 @@ module.exports = {
         selector: 'MemberExpression > Identifier[name="stringify"]',
       },
     ],
-    '@typescript-eslint/switch-exhaustiveness-check': 'error',
   },
 }
