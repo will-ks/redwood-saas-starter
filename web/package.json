@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
+    "@mantine/core": "5.10.3",
+    "@mantine/hooks": "5.10.3",
+    "@mantine/modals": "5.10.3",
     "@redwoodjs/auth-supertokens-web": "4.1.0-rc.263+32e0f7b7b",
     "@redwoodjs/forms": "^4.1.0-rc.263",
     "@redwoodjs/router": "^4.1.0-rc.263",
@@ -17,8 +20,6 @@
   },
   "devDependencies": {
     "@emotion/react": "11.10.5",
-    "@mantine/core": "5.10.3",
-    "@mantine/hooks": "5.10.3",
     "@vanilla-extract/css": "1.9.5",
     "@vanilla-extract/webpack-plugin": "2.2.0",
     "vite-plugin-checker": "0.5.5"

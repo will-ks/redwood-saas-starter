@@ -1,4 +1,5 @@
 import { MantineProvider } from '@mantine/core'
+import { ModalsProvider } from '@mantine/modals'
 import { FatalErrorBoundary, RedwoodProvider } from '@redwoodjs/web'
 import { RedwoodApolloProvider } from '@redwoodjs/web/apollo'
 
@@ -13,9 +14,11 @@ const App = () => (
     <RedwoodProvider titleTemplate="%PageTitle | %AppTitle">
       <AuthProvider>
         <MantineProvider theme={theme}>
-          <RedwoodApolloProvider useAuth={useAuth}>
-            <Routes />
-          </RedwoodApolloProvider>
+          <ModalsProvider>
+            <RedwoodApolloProvider useAuth={useAuth}>
+              <Routes />
+            </RedwoodApolloProvider>
+          </ModalsProvider>
         </MantineProvider>
       </AuthProvider>
     </RedwoodProvider>

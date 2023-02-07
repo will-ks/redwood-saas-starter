@@ -4041,6 +4041,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mantine/modals@npm:5.10.3":
+  version: 5.10.3
+  resolution: "@mantine/modals@npm:5.10.3"
+  dependencies:
+    "@mantine/utils": 5.10.3
+  peerDependencies:
+    "@mantine/core": 5.10.3
+    "@mantine/hooks": 5.10.3
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: c71fbbde1136fc2e7265cf5bfe1e5262734ec23e107de19d25bbf07fe7d1220a2de87f41e478ba86e19226545dbbf5968754f2565281ab8bf16c8ce069e1e95d
+  languageName: node
+  linkType: hard
+
 "@mantine/styles@npm:5.10.3":
   version: 5.10.3
   resolution: "@mantine/styles@npm:5.10.3"
@@ -26239,6 +26253,7 @@ __metadata:
     "@emotion/react": 11.10.5
     "@mantine/core": 5.10.3
     "@mantine/hooks": 5.10.3
+    "@mantine/modals": 5.10.3
     "@redwoodjs/auth-supertokens-web": 4.1.0-rc.263+32e0f7b7b
     "@redwoodjs/forms": ^4.1.0-rc.263
     "@redwoodjs/router": ^4.1.0-rc.263
