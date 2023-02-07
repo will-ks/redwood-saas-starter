@@ -14,7 +14,7 @@
     "pre-deploy": "yarn check-env"
   },
   "devDependencies": {
-    "@redwoodjs/core": "3.5.0",
+    "@redwoodjs/core": "^4.1.0-rc.263",
     "eslint-plugin-compat": "4.0.1",
     "eslint-plugin-no-unsanitized": "4.0.1",
     "eslint-plugin-security": "1.4.0",

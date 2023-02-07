@@ -3,9 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "@redwoodjs/forms": "3.5.0",
-    "@redwoodjs/router": "3.5.0",
-    "@redwoodjs/web": "3.5.0",
+    "@redwoodjs/forms": "^4.1.0-rc.263",
+    "@redwoodjs/router": "^4.1.0-rc.263",
+    "@redwoodjs/vite": "4.1.0-rc.263+32e0f7b7b",
+    "@redwoodjs/web": "^4.1.0-rc.263",
     "@will-ks/helpers": "1.2.0",
     "prop-types": "15.8.1",
     "react": "17.0.2",
