@@ -3,6 +3,7 @@ import { isBrowser } from '@redwoodjs/prerender/browserUtils'
 import { FC } from 'react'
 import SuperTokens, { SuperTokensWrapper } from 'supertokens-auth-react'
 import Session from 'supertokens-auth-react/recipe/session'
+import ThirdPartyEmailPassword from 'supertokens-auth-react/recipe/thirdpartyemailpassword'
 import config from './lib/config'
 
 const superTokensClient = {
@@ -14,18 +15,21 @@ isBrowser &&
   SuperTokens.init({
     appInfo: {
       appName: config.app.name,
-      apiDomain: config.app.api.domain,
+      apiDomain: config.app.web.domain,
       websiteDomain: config.app.web.domain,
       websiteBasePath: '/auth',
       apiBasePath: '/auth',
+      apiGatewayPath: '/.redwood/functions',
     },
     recipeList: [
       Session.init(),
-      // ThirdPartyEmailPassword.init({
-      //   signInAndUpFeature: {
-      //     providers: [Github.init(), Google.init(), Apple.init()],
-      //   },
-      // }),
+      ThirdPartyEmailPassword.init({
+        signInAndUpFeature: {
+          providers: [
+            // Github.init(), Google.init(), Apple.init()
+          ],
+        },
+      }),
     ],
   })
 
