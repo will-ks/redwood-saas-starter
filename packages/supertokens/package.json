@@ -1,0 +1,10 @@
+{
+  "name": "supertokens",
+  "packageManager": "yarn@3.2.1",
+  "scripts": {
+    "start": "docker-compose --project-directory src up",
+    "stop": "docker-compose --project-directory src down",
+    "start:test": "docker-compose --project-directory src -f src/docker-compose-test.yml up --detach --wait",
+    "stop:test": "docker-compose --project-directory src -f src/docker-compose-test.yml down -v --remove-orphans"
+  }
+}

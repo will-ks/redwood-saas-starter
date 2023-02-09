@@ -35,12 +35,6 @@ const apiConfig = {
           'process.env.REDWOOD_ENV_WEB_DOMAIN'
         ),
       },
-      api: {
-        domain: assertAndReturn(
-          process.env.REDWOOD_ENV_API_DOMAIN,
-          'process.env.REDWOOD_ENV_API_DOMAIN'
-        ),
-      },
     },
   },
 }
