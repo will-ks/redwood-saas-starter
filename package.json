@@ -11,7 +11,12 @@
   "scripts": {
     "dev": "yarn check-env && yarn rw dev",
     "check-env": "yarn rw exec check-env",
-    "pre-deploy": "yarn check-env"
+    "pre-deploy": "yarn check-env",
+    "start:cluster-ephemeral": "nomad job run redwood-saas-starter-ephemeral.nomad",
+    "stop:cluster-ephemeral": "nomad job stop redwood-saas-starter-ephemeral",
+    "nomad-ui": "open http://localhost:4646",
+    "temporal-ui": "open http://localhost:8233",
+    "cluster-ui": "yarn nomad-ui && yarn temporal-ui"
   },
   "devDependencies": {
     "@redwoodjs/auth-supertokens-setup": "4.1.0-rc.263",

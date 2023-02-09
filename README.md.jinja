@@ -27,12 +27,20 @@ Each package has it's own README.md.
 ## Getting started
 
 ### Prerequisites
-Redwood requires [Node.js](https://nodejs.org/en/) (>=14.19.x <=16.x) and [Yarn](https://yarnpkg.com/) (>=1.15)
+Redwood requires [Node.js](https://nodejs.org/en/) (>=14.19.x <=16.x) and [Yarn](https://yarnpkg.com/) (>=1.15).
+
+[optional] To run the full cluster locally, you will also need [Docker desktop](https://docs.docker.com/desktop/) (>=20.10.x) and [Nomad](https://developer.hashicorp.com/nomad/downloads) (>=1.4.x).
 
 ### Setup
 1. Start by installing dependencies: `yarn install`
 2. Create a `.env` file in the monorepo root, following the template in `.env.example`.
 3. Start the development server: `yarn dev`
+
+If your `.env` file is pointing to remote services, this is enough to work on the codebase. But if you would rather run the full services cluster locally (and your machine is powerful enough to do so):
+1. Make sure you have Docker and Nomad installed
+2. Run the Nomad agent is locally in dev mode: `nomad agent -dev -bind 0.0.0.0 -log-level INFO`
+3. Start the cluster with `yarn start:cluster-ephemeral`.
+4. [optional] Open the cluster UI: `yarn cluster-ui`
 
 ### Styles & Linting
 
