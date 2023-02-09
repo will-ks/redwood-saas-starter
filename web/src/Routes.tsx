@@ -19,7 +19,7 @@ const Routes = () => {
 
   return (
     <Router useAuth={useAuth}>
-      <Route path="/auth/{mode}" page={AuthPage} name="auth" />
+      {/*<Route path="/auth/{mode}" page={AuthPage} name="auth" /> // Note: This page is currently overwritten by Supertoken's route handling*/}
       {/*Note: NotFoundPage is always prerendered*/}
       <Route notfound page={NotFoundPage} />
     </Router>

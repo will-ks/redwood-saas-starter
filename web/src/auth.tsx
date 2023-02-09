@@ -16,7 +16,6 @@ isBrowser &&
       appName: config.app.name,
       apiDomain: config.app.api.domain,
       websiteDomain: config.app.web.domain,
-      apiGatewayPath: '/.redwood/functions',
       websiteBasePath: '/auth',
       apiBasePath: '/auth',
     },

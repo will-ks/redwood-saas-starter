@@ -11,7 +11,6 @@ export const config: TypeInput = {
     appName: apiConfig.constants.app.name,
     apiDomain: apiConfig.constants.app.api.domain,
     websiteDomain: apiConfig.constants.app.web.domain,
-    apiGatewayPath: '/.redwood/functions',
     websiteBasePath: '/auth',
     apiBasePath: '/auth',
   },
