@@ -8,6 +8,21 @@ const webConfig = {
     process.env.REDWOOD_ENV_EXAMPLE,
     'process.env.REDWOOD_ENV_EXAMPLE'
   ),
+  app: {
+    name: assertAndReturn(process.env.REDWOOD_ENV_APP_NAME),
+    web: {
+      domain: assertAndReturn(
+        process.env.REDWOOD_ENV_WEB_DOMAIN,
+        'process.env.REDWOOD_ENV_WEB_DOMAIN'
+      ),
+    },
+    api: {
+      domain: assertAndReturn(
+        process.env.REDWOOD_ENV_API_DOMAIN,
+        'process.env.REDWOOD_ENV_API_DOMAIN'
+      ),
+    },
+  },
 }
 
 export default webConfig

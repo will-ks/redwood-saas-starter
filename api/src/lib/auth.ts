@@ -26,31 +26,33 @@ export type AssertedCurrentUser = NonNullable<
   Awaited<ReturnType<typeof getCurrentUser>>
 >
 
-type SupabaseDecoded = {
-  aud: string
+type SupertokensDecodedJwt = {
   exp: number
-  sub?: string
-  email: string
-  phone: string
-  app_metadata: { provider: 'email'; providers: ['email'] }
-  user_metadata: Record<string, never>
-  role: 'authenticated'
-  session_id: string
+  sub: string
+  iss: string
+  iat: number
 }
+
+const isSupertokensDecodedJwt = (
+  toCheck: AuthContextPayload[0]
+): toCheck is SupertokensDecodedJwt =>
+  !!toCheck &&
+  typeof toCheck['exp'] === 'number' &&
+  typeof toCheck['sub'] === 'string' &&
+  typeof toCheck['iss'] === 'string' &&
+  typeof toCheck['iat'] === 'number'
 
 export const getCurrentUser = async (
   decoded: AuthContextPayload[0],
   raw: AuthContextPayload[1],
   req?: AuthContextPayload[2]
 ) => {
-  const { sub, email } = decoded as SupabaseDecoded
-  if (typeof sub !== 'string' || raw.type !== 'supabase') {
-    throw new Error(`Unexpected arguments, got ${decoded}, ${raw}`)
+  if (!isSupertokensDecodedJwt(decoded)) {
+    throw new Error('Unexpected decoded JWT structure')
   }
-
+  const { sub } = decoded
   return {
     id: sub,
-    email,
   }
 }
 

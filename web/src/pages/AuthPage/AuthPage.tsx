@@ -15,6 +15,9 @@ export enum AuthPageMode {
 
 const isAuthPageMode = getEnumTypeGuard(AuthPageMode)
 
+// Note: This page is currently not used since the Supertokens auth implementation uses its own UI.
+// TODO: Use this page once the Supertokens implementation supports custom UI.
+
 const AuthPage: FC<{
   mode: string
 }> = ({ mode: modeParam }) => {
