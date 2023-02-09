@@ -8,10 +8,17 @@
 // 'src/pages/Admin/BooksPage/BooksPage.js' -> AdminBooksPage
 
 import { Route, Router } from '@redwoodjs/router'
+import SuperTokens from 'supertokens-auth-react'
+
+import { useAuth } from './auth'
 
 const Routes = () => {
+  if (SuperTokens.canHandleRoute()) {
+    return SuperTokens.getRoutingComponent()
+  }
+
   return (
-    <Router>
+    <Router useAuth={useAuth}>
       <Route path="/auth/{mode}" page={AuthPage} name="auth" />
       {/*Note: NotFoundPage is always prerendered*/}
       <Route notfound page={NotFoundPage} />

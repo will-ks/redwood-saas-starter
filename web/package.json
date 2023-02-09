@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
+    "@redwoodjs/auth-supertokens-web": "4.1.0-rc.263+32e0f7b7b",
     "@redwoodjs/forms": "^4.1.0-rc.263",
     "@redwoodjs/router": "^4.1.0-rc.263",
     "@redwoodjs/vite": "4.1.0-rc.263+32e0f7b7b",
@@ -10,7 +11,9 @@
     "@will-ks/helpers": "1.2.0",
     "prop-types": "15.8.1",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "supertokens-auth-react": "0.30",
+    "supertokens-web-js": "0.4"
   },
   "devDependencies": {
     "@emotion/react": "11.10.5",
