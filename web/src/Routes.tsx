@@ -7,7 +7,8 @@
 // 'src/pages/HomePage/HomePage.js'         -> HomePage
 // 'src/pages/Admin/BooksPage/BooksPage.js' -> AdminBooksPage
 
-import { Route, Router } from '@redwoodjs/router'
+import { Private, Route, Router } from '@redwoodjs/router'
+import HandleUnauthenticatedPage from 'src/pages/HandleUnauthenticatedPage/HandleUnauthenticatedPage'
 import SuperTokens from 'supertokens-auth-react'
 
 import { useAuth } from './auth'
@@ -19,9 +20,13 @@ const Routes = () => {
 
   return (
     <Router useAuth={useAuth}>
+      <Route path="/check-auth" page={HandleUnauthenticatedPage} name={'check-auth'} />
       {/*<Route path="/auth/{mode}" page={AuthPage} name="auth" /> // Note: This page is currently overwritten by Supertoken's route handling*/}
       {/*Note: NotFoundPage is always prerendered*/}
       <Route notfound page={NotFoundPage} />
+      <Private unauthenticated={'check-auth'}>
+        <Route path="/profile" page={ProfilePage} name="profile" />
+      </Private>
     </Router>
   )
 }
