@@ -1,12 +1,23 @@
 version: '3.8'
 services:
-  app:
-    command: yarn workspace temporal-worker start
+#  temporal-worker:
+#    command: yarn workspace temporal-worker start
+#    build:
+#      context: ./
+#      dockerfile: ./Dockerfile
+#    ports:
+#      - '3000:3000'
+#    volumes:
+#      - .:/working-dir
+#    restart: always
+  redwood:
+    command: yarn serve
     build:
       context: ./
       dockerfile: ./Dockerfile
     ports:
-      - '3000:3000'
+      - '8910:8910'
+      - '8911:8911'
     volumes:
       - .:/working-dir
     restart: always

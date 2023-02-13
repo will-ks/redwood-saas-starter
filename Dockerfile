@@ -1,3 +1,5 @@
+# Note: If you make any changes in this file, you need to tell docker-compose to rebuild the image with:
+# docker-compose up --build -V
 FROM node:16
 
 WORKDIR /working-dir
@@ -20,6 +22,7 @@ RUN yarn install --frozen-lockfile
 
 COPY . .
 
-EXPOSE 3000
+EXPOSE 8910
+EXPOSE 8911
 
 
