@@ -21,6 +21,7 @@
   "devDependencies": {
     "@redwoodjs/auth-supertokens-setup": "4.1.0-rc.263",
     "@redwoodjs/core": "^4.1.0-rc.263",
+    "esbuild": "0.17.8",
     "eslint-plugin-compat": "4.0.1",
     "eslint-plugin-no-unsanitized": "4.0.1",
     "eslint-plugin-security": "1.4.0",
