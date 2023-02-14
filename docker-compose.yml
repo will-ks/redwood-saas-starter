@@ -1,16 +1,52 @@
 version: '3.8'
 services:
-#  temporal-worker:
-#    command: yarn workspace temporal-worker start
-#    build:
-#      context: ./
-#      dockerfile: ./Dockerfile
-#    ports:
-#      - '3000:3000'
-#    volumes:
-#      - .:/working-dir
-#    restart: always
+  temporalite:
+    build: https://github.com/temporalio/temporalite.git#main
+    expose:
+      - 7233:7233
+      - 8233:8233
+    stdin_open: true
+    tty: true
+  supertokens:
+    image: registry.supertokens.io/supertokens/supertokens-postgresql:4.3
+    expose:
+      - 3567:3567
+    environment:
+      DISABLE_TELEMETRY: true
+    restart: unless-stopped
+    healthcheck:
+      test: >
+        bash -c 'exec 3<>/dev/tcp/127.0.0.1/3567 && echo -e "GET /hello HTTP/1.1\r\nhost: 127.0.0.1:3567\r\nConnection: close\r\n\r\n" >&3 && cat <&3 | grep "Hello"'
+      interval: 60s
+      timeout: 5s
+      retries: 5
+  ledger:
+    image: "ghcr.io/formancehq/ledger:v1.8.1"
+    healthcheck:
+      test: [ "CMD", "wget", "http://127.0.0.1:3068/_info", "-O", "-", "-q" ]
+      interval: 60s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    environment:
+      NUMARY_SERVER_HTTP_BIND_ADDRESS: "0.0.0.0:3068"
+    expose:
+      - 3068:3068
+  temporal-worker:
+    depends_on:
+      - temporalite
+    command: yarn workspace temporal-worker start
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    volumes:
+      - .:/working-dir
+    restart: always
   redwood:
+    depends_on:
+      - temporal-worker
+      - ledger
+      - supertokens
     command: yarn serve
     build:
       context: ./
