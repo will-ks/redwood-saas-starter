@@ -25,3 +25,14 @@ export enum AssetName {
   Token = 'TOK',
   Usd = 'USD',
 }
+
+export enum UserRoleType {
+  Standard = 'standard',
+  SuperUser = 'superuser',
+}
+
+export enum OrganizationRoleType {
+  Owner = 'owner',
+  Admin = 'admin',
+  Collaborator = 'collaborator',
+}
