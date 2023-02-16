@@ -1,5 +1,5 @@
 import apiConfig from 'api/src/lib/config'
-import webConfig from 'web/src/lib/config'
+import webConfig from 'web/src/data/config'
 // Confirm environment variables exist before deploying
 
 export default async () => {
