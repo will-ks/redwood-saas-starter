@@ -1,4 +1,5 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
+import { AuthenticationError } from '@redwoodjs/graphql-server'
 import { getDirectiveName, mockRedwoodDirective } from '@redwoodjs/testing/api'
 
 import requireAuth from './requireAuth'
@@ -9,11 +10,17 @@ describe('requireAuth directive', () => {
     expect(getDirectiveName(requireAuth.schema)).toBe('requireAuth')
   })
 
-  it('requireAuth has stub implementation. Should not throw when current user', () => {
-    // If you want to set values in context, pass it through e.g.
-    // mockRedwoodDirective(requireAuth, { context: { currentUser: { id: 1, name: 'Lebron McGretzky' } }})
-    const mockExecution = mockRedwoodDirective(requireAuth, { context: {} })
+  it('throws AuthenticationError by default', () => {
+    const mockExecution = mockRedwoodDirective(requireAuth, {})
+    expect(mockExecution).toThrowError(AuthenticationError)
+  })
 
+  it('doesnt throw when context.currentUser is set (to anything)', () => {
+    const mockExecution = mockRedwoodDirective(requireAuth, {
+      context: {
+        currentUser: {},
+      },
+    })
     expect(mockExecution).not.toThrowError()
   })
 })

@@ -15,11 +15,10 @@ model User {
   id                         String                   @id @default(uuid())
   createdAt                  DateTime                 @default(now())
   updatedAt                  DateTime                 @updatedAt
-  email                      String                   @unique
   userRoles                  UserRole[]
   organizationMembership     OrganizationMembership[]
   authenticationProviderType String
-  authenticationProviderId   String
+  authenticationProviderId   String                   @unique
 }
 
 model UserRole {

@@ -34,7 +34,6 @@ export default async () => {
             },
             create: {
               id,
-              email: `${id}@example.com`,
               authenticationProviderType:
                 AuthenticationProviderType.SuperTokens,
               authenticationProviderId,

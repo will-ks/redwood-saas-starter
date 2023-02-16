@@ -1,5 +1,5 @@
 import { AuthContextPayload } from '@redwoodjs/api'
-import { AuthenticationError } from '@redwoodjs/graphql-server'
+import { GetCurrentUser } from '@redwoodjs/graphql-server/dist/functions/types'
 
 /**
  * getCurrentUser returns the user information together with
@@ -26,67 +26,28 @@ export type AssertedCurrentUser = NonNullable<
   Awaited<ReturnType<typeof getCurrentUser>>
 >
 
-type SupertokensDecodedJwt = {
-  exp: number
-  sub: string
-  iss: string
-  iat: number
-}
+export const getCurrentUser: GetCurrentUser = async (decoded) => {
+  type SupertokensDecodedJwt = {
+    exp: number
+    sub: string
+    iss: string
+    iat: number
+  }
+  const isSupertokensDecodedJwt = (
+    toCheck: AuthContextPayload[0]
+  ): toCheck is SupertokensDecodedJwt =>
+    !!toCheck &&
+    typeof toCheck['exp'] === 'number' &&
+    typeof toCheck['sub'] === 'string' &&
+    typeof toCheck['iss'] === 'string' &&
+    typeof toCheck['iat'] === 'number'
 
-const isSupertokensDecodedJwt = (
-  toCheck: AuthContextPayload[0]
-): toCheck is SupertokensDecodedJwt =>
-  !!toCheck &&
-  typeof toCheck['exp'] === 'number' &&
-  typeof toCheck['sub'] === 'string' &&
-  typeof toCheck['iss'] === 'string' &&
-  typeof toCheck['iat'] === 'number'
-
-export const getCurrentUser = async (
-  decoded: AuthContextPayload[0],
-  raw: AuthContextPayload[1],
-  req?: AuthContextPayload[2]
-) => {
   if (!isSupertokensDecodedJwt(decoded)) {
     throw new Error('Unexpected decoded JWT structure')
   }
   const { sub } = decoded
+
   return {
-    id: sub,
+    sub,
   }
-}
-
-export const isAuthenticated = (): boolean => {
-  return !!context.currentUser
-}
-
-type AuthOptions = {
-  expectedUserId?: string
-}
-// Don't rename - redwood validators use this
-export const requireAuth = (options?: AuthOptions) => {
-  getRequiredCurrentUser(options)
-}
-
-export const getRequiredCurrentUser = (
-  options?: AuthOptions
-): AssertedCurrentUser => {
-  if (!isAuthenticated()) {
-    throw new AuthenticationError(
-      "You don't have permission to do that. Error: notAuthenticated."
-    )
-  }
-  const { currentUser } = context
-  if (!currentUser) {
-    throw new Error('Expected currentUser')
-  }
-  if (!currentUser.id) {
-    throw new Error('Got invalid currentUser')
-  }
-  if (options?.expectedUserId && currentUser.id !== options.expectedUserId) {
-    throw new AuthenticationError(
-      "You don't have permission to do that. Error: user ID does not match."
-    )
-  }
-  return currentUser
 }
