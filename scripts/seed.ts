@@ -1,40 +1,56 @@
 import { db } from 'api/src/lib/db'
-import { OrganizationRoleType, UserRoleType } from 'shared-data/src'
+import pAll from 'p-all'
+import {
+  AuthenticationProviderType,
+  OrganizationRoleType,
+  UserRoleType,
+} from 'shared-data/src'
 
 export default async () => {
-  const [standardUser1, standardUser2, superUser] = await Promise.all(
+  // User pAll with concurrency: 1 instead of Promise.all due to https://github.com/prisma/prisma/issues/10306
+  const [standardUser1, standardUser2, superUser] = await pAll(
     [
       {
         id: 'seeded-standard-user',
         roleType: UserRoleType.Standard,
+        authenticationProviderId: 'nonexistant1',
       },
       {
         id: 'seeded-standard-user-2',
         roleType: UserRoleType.Standard,
+        authenticationProviderId: 'nonexistant2',
       },
       {
         id: 'seeded-super-user',
         roleType: UserRoleType.SuperUser,
+        authenticationProviderId: 'nonexistant3',
       },
-    ].map(({ id, roleType }) =>
-      db.user.upsert({
-        where: {
-          id,
-        },
-        create: {
-          id,
-          email: `${id}@example.com`,
-          userRoles: {
-            create: {
-              roleType,
+    ].map(
+      ({ id, roleType, authenticationProviderId }) =>
+        async () =>
+          await db.user.upsert({
+            where: {
+              id,
             },
-          },
-        },
-        update: {},
-      })
-    )
+            create: {
+              id,
+              email: `${id}@example.com`,
+              authenticationProviderType:
+                AuthenticationProviderType.SuperTokens,
+              authenticationProviderId,
+              userRoles: {
+                create: {
+                  roleType,
+                },
+              },
+            },
+            update: {},
+          })
+    ),
+    { concurrency: 1 }
   )
-  const organization = await db.organization.upsert({
+
+  await db.organization.upsert({
     where: {
       id: 'seeded-organization',
     },
@@ -83,5 +99,6 @@ export default async () => {
     },
     update: {},
   })
+
   console.log('Seeded database.')
 }
