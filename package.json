@@ -41,5 +41,8 @@
     "last 2 Edge major versions",
     "last 2 Safari major versions",
     "last 2 iOS major versions"
-  ]
+  ],
+  "dependencies": {
+    "p-all": "3.0.0"
+  }
 }

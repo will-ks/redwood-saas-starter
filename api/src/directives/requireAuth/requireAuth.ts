@@ -1,19 +1,26 @@
-import { createValidatorDirective } from '@redwoodjs/graphql-server'
+import {
+  AuthenticationError,
+  createValidatorDirective,
+} from '@redwoodjs/graphql-server'
+import assert from 'assert'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import gql from 'graphql-tag'
-
-import { requireAuth as applicationRequireAuth } from 'src/lib/auth'
+import { logger } from 'src/lib/logger'
 
 export const schema = gql`
   """
-  Use to check whether or not a user is authenticated and is associated
-  with an optional set of roles.
+  Use to check whether or not a user is authenticated.
   """
-  directive @requireAuth(roles: [String]) on FIELD_DEFINITION
+  directive @requireAuth on FIELD_DEFINITION
 `
 
-const requireAuth = createValidatorDirective(schema, ({ directiveArgs }) => {
-  applicationRequireAuth()
+const requireAuth = createValidatorDirective(schema, () => {
+  try {
+    assert(context.currentUser)
+  } catch (error) {
+    logger.info('User not authenticated', error)
+    throw new AuthenticationError("You don't have permission to do that.")
+  }
 })
 
 export default requireAuth

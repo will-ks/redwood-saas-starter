@@ -12,7 +12,47 @@ generator client {
 // to create migrations for them and apply to your dev DB.
 
 model User {
+  id                         String                   @id @default(uuid())
+  createdAt                  DateTime                 @default(now())
+  updatedAt                  DateTime                 @updatedAt
+  userRoles                  UserRole[]
+  organizationMembership     OrganizationMembership[]
+  authenticationProviderType String
+  authenticationProviderId   String                   @unique
+}
+
+model UserRole {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
+  roleType  String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+}
+
+model Organization {
+  id          String                   @id @default(uuid())
+  createdAt   DateTime                 @default(now())
+  updatedAt   DateTime                 @updatedAt
+  memberships OrganizationMembership[]
+}
+
+model OrganizationMembership {
+  id                String             @id @default(uuid())
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @default(now())
+  user              User               @relation(fields: [userId], references: [id])
+  userId            String
+  organization      Organization       @relation(fields: [organizationId], references: [id])
+  organizationId    String
+  organizationRoles OrganizationRole[]
+}
+
+model OrganizationRole {
+  id                       String                 @id @default(uuid())
+  createdAt                DateTime               @default(now())
+  updatedAt                DateTime               @default(now())
+  roleType                 String
+  organizationMembership   OrganizationMembership @relation(fields: [organizationMembershipId], references: [id])
+  organizationMembershipId String
 }
