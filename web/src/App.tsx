@@ -6,14 +6,13 @@ import FatalErrorPage from 'src/pages/FatalErrorPage'
 import Routes from 'src/Routes'
 
 import { AuthProvider, useAuth } from './auth'
-
-import './index.css'
+import theme from './data/theme'
 
 const App = () => (
   <FatalErrorBoundary page={FatalErrorPage}>
     <RedwoodProvider titleTemplate="%PageTitle | %AppTitle">
       <AuthProvider>
-        <MantineProvider>
+        <MantineProvider theme={theme}>
           <RedwoodApolloProvider useAuth={useAuth}>
             <Routes />
           </RedwoodApolloProvider>

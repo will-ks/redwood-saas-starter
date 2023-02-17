@@ -4,7 +4,7 @@ import { FC } from 'react'
 import SuperTokens, { SuperTokensWrapper } from 'supertokens-auth-react'
 import Session from 'supertokens-auth-react/recipe/session'
 import ThirdPartyEmailPassword from 'supertokens-auth-react/recipe/thirdpartyemailpassword'
-import config from './lib/config'
+import config from './data/config'
 
 const superTokensClient = {
   sessionRecipe: Session,
