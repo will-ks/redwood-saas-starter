@@ -2,6 +2,16 @@
 
 This project is a starter boilerplate for creating SAAS projects with Redwood.
 
+Features:
+- TypeScript
+- Personally configured ESLint
+- Temporal for workflows
+- Ledger for internal transactions
+- Mantine for UI
+- Vanilla Extract for styling
+- Supertokens for Auth
+- Docker + Docker compose
+
 ## Gettings started
 
 - Install [copier CLI](https://copier.readthedocs.io/en/stable/):
