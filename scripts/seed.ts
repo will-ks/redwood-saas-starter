@@ -1,10 +1,6 @@
 import { db } from 'api/src/lib/db'
 import pAll from 'p-all'
-import {
-  AuthenticationProviderType,
-  OrganizationRoleType,
-  UserRoleType,
-} from 'shared-data/src'
+import { OrganizationRoleType, UserRoleType } from 'shared-data/src'
 
 export default async () => {
   // User pAll with concurrency: 1 instead of Promise.all due to https://github.com/prisma/prisma/issues/10306
@@ -34,8 +30,6 @@ export default async () => {
             },
             create: {
               id,
-              authenticationProviderType:
-                AuthenticationProviderType.SuperTokens,
               authenticationProviderId,
               userRoles: {
                 create: {
@@ -55,6 +49,7 @@ export default async () => {
     },
     create: {
       id: 'seeded-organization',
+      name: 'seeded-organization',
       memberships: {
         create: [
           {

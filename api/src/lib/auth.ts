@@ -26,7 +26,9 @@ export type AssertedCurrentUser = NonNullable<
   Awaited<ReturnType<typeof getCurrentUser>>
 >
 
-export const getCurrentUser: GetCurrentUser = async (decoded) => {
+export const getCurrentUser = async (
+  decoded: Parameters<GetCurrentUser>[0]
+) => {
   type SupertokensDecodedJwt = {
     exp: number
     sub: string
@@ -46,8 +48,9 @@ export const getCurrentUser: GetCurrentUser = async (decoded) => {
     throw new Error('Unexpected decoded JWT structure')
   }
   const { sub } = decoded
+  const supertokensProviderId = 'supertokens:' + sub
 
   return {
-    sub,
+    supertokensProviderId,
   }
 }

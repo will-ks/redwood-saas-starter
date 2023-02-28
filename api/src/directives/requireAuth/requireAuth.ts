@@ -1,11 +1,7 @@
-import {
-  AuthenticationError,
-  createValidatorDirective,
-} from '@redwoodjs/graphql-server'
-import assert from 'assert'
+import { createValidatorDirective } from '@redwoodjs/graphql-server'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import gql from 'graphql-tag'
-import { logger } from 'src/lib/logger'
+import { getAssertedCurrentUser } from 'src/lib/directive-helpers'
 
 export const schema = gql`
   """
@@ -15,12 +11,7 @@ export const schema = gql`
 `
 
 const requireAuth = createValidatorDirective(schema, () => {
-  try {
-    assert(context.currentUser)
-  } catch (error) {
-    logger.info('User not authenticated', error)
-    throw new AuthenticationError("You don't have permission to do that.")
-  }
+  getAssertedCurrentUser()
 })
 
 export default requireAuth
