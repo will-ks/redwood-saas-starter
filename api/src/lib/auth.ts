@@ -26,7 +26,9 @@ export type AssertedCurrentUser = NonNullable<
   Awaited<ReturnType<typeof getCurrentUser>>
 >
 
-export const getCurrentUser: GetCurrentUser = async (decoded) => {
+export const getCurrentUser = async (
+  decoded: Parameters<GetCurrentUser>[0]
+) => {
   type SupertokensDecodedJwt = {
     exp: number
     sub: string
