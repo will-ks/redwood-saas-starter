@@ -1,15 +1,10 @@
-import { FC } from 'react';
-import { MetaTags } from '@redwoodjs/web'
+import { FC } from 'react'
+import UserCell from '../../components/UserCell'
 
-const ProfilePage: FC = () => {
+const ProfilePage: FC<{ id: string }> = ({ id }) => {
   return (
     <>
-      <MetaTags title="Profile" description="Profile page" />
-
-      <h1>ProfilePage</h1>
-      <p>
-        Find me in <code>./web/src/pages/ProfilePage/ProfilePage.tsx</code>.
-      </p>
+      <UserCell id={id} />
     </>
   )
 }

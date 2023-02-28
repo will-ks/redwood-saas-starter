@@ -25,7 +25,7 @@ const Routes = () => {
       {/*Note: NotFoundPage is always prerendered*/}
       <Route notfound page={NotFoundPage} />
       <Private unauthenticated={'check-auth'}>
-        <Route path="/profile" page={ProfilePage} name="profile" />
+        <Route path="/profile/{id:String}" page={ProfilePage} name="profile" />
       </Private>
     </Router>
   )
