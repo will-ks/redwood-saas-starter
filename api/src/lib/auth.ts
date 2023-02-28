@@ -48,8 +48,9 @@ export const getCurrentUser = async (
     throw new Error('Unexpected decoded JWT structure')
   }
   const { sub } = decoded
+  const supertokensProviderId = 'supertokens:' + sub
 
   return {
-    sub,
+    supertokensProviderId,
   }
 }

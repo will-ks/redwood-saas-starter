@@ -36,7 +36,3 @@ export enum OrganizationRoleType {
   Admin = 'admin',
   Collaborator = 'collaborator',
 }
-
-export enum AuthenticationProviderType {
-  SuperTokens = 'supertokens',
-}
