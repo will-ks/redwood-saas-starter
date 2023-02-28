@@ -12,19 +12,19 @@ generator client {
 // to create migrations for them and apply to your dev DB.
 
 model User {
-  id                         String                   @id @default(uuid())
-  createdAt                  DateTime                 @default(now())
-  updatedAt                  DateTime                 @updatedAt
-  userRoles                  UserRole[]
-  organizationMembership     OrganizationMembership[]
-  authenticationProviderType String
-  authenticationProviderId   String                   @unique
+  id                       String                   @id @default(uuid())
+  createdAt                DateTime                 @default(now())
+  updatedAt                DateTime                 @default(now()) @updatedAt
+  userRoles                UserRole[]
+  organizationMembership   OrganizationMembership[]
+  authenticationProviderId String                   @unique
+  username                 String?                  @unique
 }
 
 model UserRole {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
   roleType  String
   user      User     @relation(fields: [userId], references: [id])
   userId    String
@@ -33,14 +33,15 @@ model UserRole {
 model Organization {
   id          String                   @id @default(uuid())
   createdAt   DateTime                 @default(now())
-  updatedAt   DateTime                 @updatedAt
+  updatedAt   DateTime                 @default(now()) @updatedAt
+  name        String
   memberships OrganizationMembership[]
 }
 
 model OrganizationMembership {
   id                String             @id @default(uuid())
   createdAt         DateTime           @default(now())
-  updatedAt         DateTime           @default(now())
+  updatedAt         DateTime           @default(now()) @updatedAt
   user              User               @relation(fields: [userId], references: [id])
   userId            String
   organization      Organization       @relation(fields: [organizationId], references: [id])
@@ -51,7 +52,7 @@ model OrganizationMembership {
 model OrganizationRole {
   id                       String                 @id @default(uuid())
   createdAt                DateTime               @default(now())
-  updatedAt                DateTime               @default(now())
+  updatedAt                DateTime               @default(now()) @updatedAt
   roleType                 String
   organizationMembership   OrganizationMembership @relation(fields: [organizationMembershipId], references: [id])
   organizationMembershipId String
