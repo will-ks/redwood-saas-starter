@@ -1,11 +1,11 @@
 export const schema = gql`
   type UserRole {
     id: String!
-    createdAt: DateTime!
-    updatedAt: DateTime!
+    createdAt: DateTime! @ownerOrSuperuserOnly(userIdKey: "userId")
+    updatedAt: DateTime! @ownerOrSuperuserOnly(userIdKey: "userId")
     roleType: String!
-    user: User!
-    userId: String!
+    user: User! @ownerOrSuperuserOnly(userIdKey: "userId")
+    userId: String! @ownerOrSuperuserOnly(userIdKey: "userId")
   }
 
   type Query {

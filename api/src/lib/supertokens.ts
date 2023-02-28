@@ -1,4 +1,9 @@
+import assert from 'assert'
+import { getAuthenticationProviderId } from 'src/lib/auth'
 import apiConfig from 'src/lib/config'
+import { db } from 'src/lib/db'
+import { logger } from 'src/lib/logger'
+import { AuthenticationProviderName, UserRoleType } from 'src/lib/models'
 import * as Session from 'supertokens-node/recipe/session'
 import ThirdPartyEmailPassword from 'supertokens-node/recipe/thirdpartyemailpassword'
 import type { TypeInput } from 'supertokens-node/types'
@@ -40,6 +45,38 @@ export const config: TypeInput = {
         //   },
         // }),
       ],
+      override: {
+        apis: (originalImplementation) => {
+          return {
+            ...originalImplementation,
+            emailPasswordSignUpPOST: async function (input) {
+              assert(originalImplementation.emailPasswordSignUpPOST)
+              const response =
+                await originalImplementation.emailPasswordSignUpPOST(input)
+              if (response.status === 'OK') {
+                const authenticationProviderId = getAuthenticationProviderId(
+                  AuthenticationProviderName.Supertokens,
+                  response.user.id
+                )
+                logger.info(
+                  `Creating new user with authenticationProviderId ${authenticationProviderId}`
+                )
+                await db.user.create({
+                  data: {
+                    authenticationProviderId,
+                    userRoles: {
+                      create: {
+                        roleType: UserRoleType.Standard,
+                      },
+                    },
+                  },
+                })
+              }
+              return response
+            },
+          }
+        },
+      },
     }),
     Session.init({
       jwt: { enable: true, ...jwksIssuerUrl },

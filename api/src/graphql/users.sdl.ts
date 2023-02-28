@@ -1,12 +1,12 @@
 export const schema = gql`
   type User {
     id: String!
-    createdAt: DateTime!
-    updatedAt: DateTime!
-    userRoles: [UserRole]!
+    createdAt: DateTime! @ownerOrSuperuserOnly(userIdKey: "id")
+    updatedAt: DateTime! @ownerOrSuperuserOnly(userIdKey: "id")
+    userRoles: [UserRole]! @ownerOrSuperuserOnly(userIdKey: "id")
     organizationMembership: [OrganizationMembership]!
-    authenticationProviderType: String!
-    authenticationProviderId: String!
+      @ownerOrSuperuserOnly(userIdKey: "id")
+    authenticationProviderId: String! @ownerOrSuperuserOnly(userIdKey: "id")
     username: String
   }
 
