@@ -1,5 +1,6 @@
 import { AuthContextPayload } from '@redwoodjs/api'
 import { GetCurrentUser } from '@redwoodjs/graphql-server/dist/functions/types'
+import { AuthenticationProviderName } from 'src/lib/models'
 
 /**
  * getCurrentUser returns the user information together with
@@ -26,6 +27,11 @@ export type AssertedCurrentUser = NonNullable<
   Awaited<ReturnType<typeof getCurrentUser>>
 >
 
+export const getAuthenticationProviderId = (
+  authenticationProviderName: AuthenticationProviderName,
+  idFromProvider: string
+) => `${authenticationProviderName}:${idFromProvider}`
+
 export const getCurrentUser = async (
   decoded: Parameters<GetCurrentUser>[0]
 ) => {
@@ -48,7 +54,10 @@ export const getCurrentUser = async (
     throw new Error('Unexpected decoded JWT structure')
   }
   const { sub } = decoded
-  const supertokensProviderId = 'supertokens:' + sub
+  const supertokensProviderId = getAuthenticationProviderId(
+    AuthenticationProviderName.Supertokens,
+    sub
+  )
 
   return {
     supertokensProviderId,
