@@ -1,6 +1,10 @@
+/* eslint-disable no-console, unicorn/no-abusive-eslint-disable*/
+/* eslint-disable */
+
 import ReactDOM from 'react-dom'
 
 import App from './App'
+
 /**
  * When `#redwood-app` isn't empty then it's very likely that you're using
  * prerendering. So React attaches event listeners to the existing markup

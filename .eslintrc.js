@@ -32,8 +32,8 @@ module.exports = {
     'security/detect-object-injection': 'off', // Too many false positives,
     '@typescript-eslint/no-empty-function': 'off', // Useful to be able to do this
     '@typescript-eslint/explicit-module-boundary-types': 'off', // Type inferrence is better
+    'import/no-extraneous-dependencies': ['off', {}], // Redwood shares a lot of dependencies between packages, too many errors flagged
     // Additional rules
-    'import/no-extraneous-dependencies': ['error', {}],
     'no-var': 'error',
     'prefer-arrow-callback': [
       'error',
