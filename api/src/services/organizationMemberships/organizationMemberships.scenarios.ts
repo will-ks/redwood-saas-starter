@@ -6,23 +6,13 @@ export const standard = defineScenario<Prisma.OrganizationMembershipCreateArgs>(
     organizationMembership: {
       one: {
         data: {
-          user: {
-            create: {
-              authenticationProviderType: 'String',
-              authenticationProviderId: 'String1765800',
-            },
-          },
+          user: { create: { authenticationProviderId: 'String5680014' } },
           organization: { create: { name: 'String' } },
         },
       },
       two: {
         data: {
-          user: {
-            create: {
-              authenticationProviderType: 'String',
-              authenticationProviderId: 'String9631972',
-            },
-          },
+          user: { create: { authenticationProviderId: 'String8200760' } },
           organization: { create: { name: 'String' } },
         },
       },

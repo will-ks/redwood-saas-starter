@@ -6,23 +6,13 @@ export const standard = defineScenario<Prisma.UserRoleCreateArgs>({
     one: {
       data: {
         roleType: 'String',
-        user: {
-          create: {
-            authenticationProviderType: 'String',
-            authenticationProviderId: 'String4367288',
-          },
-        },
+        user: { create: { authenticationProviderId: 'String2516776' } },
       },
     },
     two: {
       data: {
         roleType: 'String',
-        user: {
-          create: {
-            authenticationProviderType: 'String',
-            authenticationProviderId: 'String9030258',
-          },
-        },
+        user: { create: { authenticationProviderId: 'String9532831' } },
       },
     },
   },
