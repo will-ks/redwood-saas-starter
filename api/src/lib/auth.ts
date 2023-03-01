@@ -1,6 +1,7 @@
 import { AuthContextPayload } from '@redwoodjs/api'
 import { GetCurrentUser } from '@redwoodjs/graphql-server/dist/functions/types'
 import { AuthenticationProviderName } from 'src/lib/models'
+import { AddedClaims } from 'src/lib/supertokens'
 
 /**
  * getCurrentUser returns the user information together with
@@ -40,7 +41,8 @@ export const getCurrentUser = async (
     sub: string
     iss: string
     iat: number
-  }
+  } & AddedClaims
+
   const isSupertokensDecodedJwt = (
     toCheck: AuthContextPayload[0]
   ): toCheck is SupertokensDecodedJwt =>
@@ -48,18 +50,16 @@ export const getCurrentUser = async (
     typeof toCheck['exp'] === 'number' &&
     typeof toCheck['sub'] === 'string' &&
     typeof toCheck['iss'] === 'string' &&
-    typeof toCheck['iat'] === 'number'
+    typeof toCheck['iat'] === 'number' &&
+    typeof toCheck['appUserId'] === 'string'
 
   if (!isSupertokensDecodedJwt(decoded)) {
     throw new Error('Unexpected decoded JWT structure')
   }
-  const { sub } = decoded
-  const supertokensProviderId = getAuthenticationProviderId(
-    AuthenticationProviderName.Supertokens,
-    sub
-  )
+  const { appUserId: userId, roles } = decoded
 
   return {
-    supertokensProviderId,
+    userId,
+    roles,
   }
 }

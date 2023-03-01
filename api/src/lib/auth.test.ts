@@ -7,38 +7,31 @@ import { getCurrentUser } from 'src/lib/auth'
 // 3. Returns with correct argument
 describe('getCurrentUser', () => {
   it('throws by default', () => {
-    expect(
-      getCurrentUser({}, { type: '', schema: '', token: '' }, undefined)
-    ).rejects.toThrow()
+    expect(getCurrentUser({})).rejects.toThrow()
   })
 
   it('throws with unexpected decoded format', () => {
     expect(
-      getCurrentUser(
-        {
-          something: 'something',
-          somethingElse: 123,
-        },
-        { type: '', schema: '', token: '' },
-        undefined
-      )
+      getCurrentUser({
+        something: 'something',
+        somethingElse: 123,
+      })
     ).rejects.toThrow()
   })
 
   it('resolves when decoded matches SuperTokens format', () => {
     expect(
-      getCurrentUser(
-        {
-          exp: 123,
-          sub: 'aaa',
-          iss: 'aaa',
-          iat: 123,
-        },
-        { type: '', schema: '', token: '' },
-        undefined
-      )
+      getCurrentUser({
+        exp: 123,
+        sub: 'aaa',
+        iss: 'aaa',
+        iat: 123,
+        appUserId: 'appUserId',
+        roles: ['someRole'],
+      })
     ).resolves.toEqual({
-      sub: 'aaa',
+      userId: 'appUserId',
+      roles: ['someRole'],
     })
   })
 })

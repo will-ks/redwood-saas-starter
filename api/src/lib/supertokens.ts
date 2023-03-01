@@ -9,6 +9,11 @@ import type { TypeInput } from 'supertokens-node/types'
 
 const jwksIssuerUrl = {}
 
+export type AddedClaims = {
+  appUserId: string
+  roles: UserRoleType[]
+}
+
 export const config: TypeInput = {
   framework: 'awsLambda',
   isInServerlessEnv: true,
@@ -76,18 +81,18 @@ export const config: TypeInput = {
                   userRoles: true,
                 },
               })
-              const inputWithAddedClaims = {
+              const addedClaims: AddedClaims = {
+                appUserId: id,
+                roles: userRoles.map((role) => role.roleType) as UserRoleType[],
+              }
+
+              return originalImplementation.createNewSession({
                 ...input,
                 accessTokenPayload: {
                   ...input.accessTokenPayload,
-                  appUserId: id,
-                  roles: userRoles.map((role) => role.roleType),
+                  ...addedClaims,
                 },
-              }
-
-              return originalImplementation.createNewSession(
-                inputWithAddedClaims
-              )
+              })
             },
           }
         },
