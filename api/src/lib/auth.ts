@@ -1,6 +1,6 @@
 import { AuthContextPayload } from '@redwoodjs/api'
 import { GetCurrentUser } from '@redwoodjs/graphql-server/dist/functions/types'
-import { AuthenticationProviderName } from 'src/lib/models'
+import { AuthenticationProviderName, UserRoleType } from 'src/lib/models'
 import { AddedClaims } from 'src/lib/supertokens'
 
 /**
@@ -24,9 +24,18 @@ import { AddedClaims } from 'src/lib/supertokens'
  * @returns RedwoodUser
  */
 
-export type AssertedCurrentUser = NonNullable<
-  Awaited<ReturnType<typeof getCurrentUser>>
->
+export type CurrentUser = {
+  userId: string
+  roles: UserRoleType[]
+}
+
+export const isCurrentUser = (
+  toCheck: unknown
+): toCheck is CurrentUser => // TODO: Improve this typeguard
+  !!toCheck &&
+  typeof toCheck === 'object' &&
+  typeof (toCheck as { userId: unknown })['userId'] === 'string' &&
+  typeof (toCheck as { roles: [] })['roles'] === 'object'
 
 export const getAuthenticationProviderId = (
   authenticationProviderName: AuthenticationProviderName,
@@ -35,7 +44,7 @@ export const getAuthenticationProviderId = (
 
 export const getCurrentUser = async (
   decoded: Parameters<GetCurrentUser>[0]
-) => {
+): Promise<CurrentUser> => {
   type SupertokensDecodedJwt = {
     exp: number
     sub: string

@@ -10,7 +10,7 @@
   },
   "scripts": {
     "dev": "yarn check-env && rw prisma migrate dev && rw dev",
-    "test": "yarn rw test --silent",
+    "test": "yarn rw test",
     "check-env": "rw exec check-env",
     "pre-deploy": "yarn check-env",
     "start:cluster-ephemeral": "nomad job run redwood-saas-starter-ephemeral.nomad",
