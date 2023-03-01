@@ -4,7 +4,6 @@ import {
   ForbiddenError,
   ValidatorDirectiveFunc,
 } from '@redwoodjs/graphql-server'
-import { db } from 'src/lib/db'
 import { getAssertedCurrentUser } from 'src/lib/directive-helpers'
 import { logger } from 'src/lib/logger'
 import { UserRoleType } from 'src/lib/models'
@@ -17,13 +16,8 @@ export const schema = gql`
 `
 
 const validate: ValidatorDirectiveFunc = async (args) => {
-  const { supertokensProviderId } = getAssertedCurrentUser()
-  const currentUser = await db.user.findUniqueOrThrow({
-    where: { authenticationProviderId: supertokensProviderId },
-    include: {
-      userRoles: true,
-    },
-  })
+  const { userId: currentUserId, roles: currentUserRoles } =
+    getAssertedCurrentUser()
 
   const userIdKey = args.directiveArgs.userIdKey
 
@@ -49,10 +43,11 @@ const validate: ValidatorDirectiveFunc = async (args) => {
     throw new AuthenticationError('Something went wrong, try again later.')
   }
 
-  const isOwnedByCurrentUser = previousReturnUserId === currentUser.id
-  const currentUserIsSuperUser = currentUser.userRoles.some(
-    (role) => role.roleType === UserRoleType.SuperUser
+  const isOwnedByCurrentUser = previousReturnUserId === currentUserId
+  const currentUserIsSuperUser = currentUserRoles.includes(
+    UserRoleType.SuperUser
   )
+
   if (!isOwnedByCurrentUser && !currentUserIsSuperUser) {
     throw new ForbiddenError(
       "You don't have permission to access the requested data"
