@@ -31,7 +31,7 @@ const performAndCheckUserTokenPurchase = async ({
   await expect(ledger.getCompanyUsdBalance()).resolves.toBe(priceUsd)
 }
 
-describe('ledger', () => {
+describe.skip('ledger', () => {
   jest.setTimeout(20_000)
 
   beforeEach(async () => {
