@@ -1,4 +1,3 @@
-import assert from 'assert'
 import { getAuthenticationProviderId } from 'src/lib/auth'
 import apiConfig from 'src/lib/config'
 import { db } from 'src/lib/db'
@@ -45,41 +44,54 @@ export const config: TypeInput = {
         //   },
         // }),
       ],
+    }),
+    Session.init({
+      jwt: { enable: true, ...jwksIssuerUrl },
       override: {
-        apis: (originalImplementation) => {
+        functions: (originalImplementation) => {
           return {
             ...originalImplementation,
-            emailPasswordSignUpPOST: async function (input) {
-              assert(originalImplementation.emailPasswordSignUpPOST)
-              const response =
-                await originalImplementation.emailPasswordSignUpPOST(input)
-              if (response.status === 'OK') {
-                const authenticationProviderId = getAuthenticationProviderId(
-                  AuthenticationProviderName.Supertokens,
-                  response.user.id
-                )
-                logger.info(
-                  `Creating new user with authenticationProviderId ${authenticationProviderId}`
-                )
-                await db.user.create({
-                  data: {
-                    authenticationProviderId,
-                    userRoles: {
-                      create: {
-                        roleType: UserRoleType.Standard,
-                      },
+            createNewSession: async function (input) {
+              const supertokensProviderId = getAuthenticationProviderId(
+                AuthenticationProviderName.Supertokens,
+                input.userId
+              )
+              logger.info(
+                `Creating new session JWT token for user with authenticationProviderId ${supertokensProviderId}`
+              )
+              const { id, userRoles } = await db.user.upsert({
+                where: {
+                  authenticationProviderId: supertokensProviderId,
+                },
+                create: {
+                  authenticationProviderId: supertokensProviderId,
+                  userRoles: {
+                    create: {
+                      roleType: UserRoleType.Standard,
                     },
                   },
-                })
+                },
+                update: {},
+                include: {
+                  userRoles: true,
+                },
+              })
+              const inputWithAddedClaims = {
+                ...input,
+                accessTokenPayload: {
+                  ...input.accessTokenPayload,
+                  appUserId: id,
+                  roles: userRoles.map((role) => role.roleType),
+                },
               }
-              return response
+
+              return originalImplementation.createNewSession(
+                inputWithAddedClaims
+              )
             },
           }
         },
       },
-    }),
-    Session.init({
-      jwt: { enable: true, ...jwksIssuerUrl },
     }),
   ],
 }
