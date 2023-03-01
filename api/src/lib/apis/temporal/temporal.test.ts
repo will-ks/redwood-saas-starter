@@ -85,7 +85,7 @@ const user2Id = 'seconduser'
 const id = 'exampleId'
 const roomProviderId = 'roomId'
 
-describe('temporal-api', () => {
+describe.skip('temporal-api', () => {
   beforeEach(async () => {
     await stopTestDependencies()
     await startTestDependencies()

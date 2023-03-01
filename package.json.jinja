@@ -9,8 +9,9 @@
     ]
   },
   "scripts": {
-    "dev": "yarn check-env && yarn rw dev",
-    "check-env": "yarn rw exec check-env",
+    "dev": "yarn check-env && rw prisma migrate dev && rw dev",
+    "test": "yarn rw test",
+    "check-env": "rw exec check-env",
     "pre-deploy": "yarn check-env",
     "start:cluster-ephemeral": "nomad job run redwood-saas-starter-ephemeral.nomad",
     "stop:cluster-ephemeral": "nomad job stop redwood-saas-starter-ephemeral",
@@ -19,8 +20,14 @@
     "cluster-ui": "yarn nomad-ui && yarn temporal-ui"
   },
   "devDependencies": {
-    "@redwoodjs/core": "3.5.0",
-    "prettier-plugin-prisma": "4.2.0"
+    "@redwoodjs/auth-supertokens-setup": "4.2.1",
+    "@redwoodjs/core": "4.2.1",
+    "eslint-plugin-compat": "4.0.1",
+    "eslint-plugin-no-unsanitized": "4.0.1",
+    "eslint-plugin-security": "1.4.0",
+    "eslint-plugin-unicorn": "40.1.0",
+    "prettier-plugin-prisma": "4.2.0",
+    "type-flag": "3.0.0"
   },
   "engines": {
     "node": ">=14.19 <=16.x",
@@ -29,5 +36,14 @@
   "prisma": {
     "seed": "yarn rw exec seed"
   },
-  "packageManager": "yarn@3.2.1"
+  "packageManager": "yarn@3.2.1",
+  "browserslist": [
+    "last 2 Chrome major versions",
+    "last 2 Edge major versions",
+    "last 2 Safari major versions",
+    "last 2 iOS major versions"
+  ],
+  "dependencies": {
+    "p-all": "3.0.0"
+  }
 }

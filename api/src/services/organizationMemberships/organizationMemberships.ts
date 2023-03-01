@@ -1,9 +1,5 @@
 import { removeNulls } from '@redwoodjs/api'
-import type {
-  QueryResolvers,
-  MutationResolvers,
-  OrganizationMembershipRelationResolvers,
-} from 'types/graphql'
+import type { QueryResolvers, MutationResolvers } from 'types/graphql'
 
 import { db } from 'src/lib/db'
 
@@ -40,21 +36,3 @@ export const deleteOrganizationMembership: MutationResolvers['deleteOrganization
       where: { id },
     })
   }
-
-export const OrganizationMembership: OrganizationMembershipRelationResolvers = {
-  user: (_obj, { root }) => {
-    return db.organizationMembership
-      .findUniqueOrThrow({ where: { id: root?.id } })
-      .user()
-  },
-  organization: (_obj, { root }) => {
-    return db.organizationMembership
-      .findUniqueOrThrow({ where: { id: root?.id } })
-      .organization()
-  },
-  organizationRoles: (_obj, { root }) => {
-    return db.organizationMembership
-      .findUniqueOrThrow({ where: { id: root?.id } })
-      .organizationRoles()
-  },
-}

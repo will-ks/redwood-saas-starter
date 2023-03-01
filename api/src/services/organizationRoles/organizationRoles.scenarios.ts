@@ -8,12 +8,7 @@ export const standard = defineScenario<Prisma.OrganizationRoleCreateArgs>({
         roleType: 'String',
         organizationMembership: {
           create: {
-            user: {
-              create: {
-                authenticationProviderType: 'String',
-                authenticationProviderId: 'String5335815',
-              },
-            },
+            user: { create: { authenticationProviderId: 'String5133776' } },
             organization: { create: { name: 'String' } },
           },
         },
@@ -24,12 +19,7 @@ export const standard = defineScenario<Prisma.OrganizationRoleCreateArgs>({
         roleType: 'String',
         organizationMembership: {
           create: {
-            user: {
-              create: {
-                authenticationProviderType: 'String',
-                authenticationProviderId: 'String9362015',
-              },
-            },
+            user: { create: { authenticationProviderId: 'String3415973' } },
             organization: { create: { name: 'String' } },
           },
         },

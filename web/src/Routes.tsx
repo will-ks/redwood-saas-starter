@@ -21,7 +21,8 @@ const Routes = () => {
   return (
     <Router useAuth={useAuth}>
       <Route path="/check-auth" page={HandleUnauthenticatedPage} name="check-auth" />
-      {/*<Route path="/auth/{mode}" page={AuthPage} name="auth" /> // Note: This page is currently overwritten by Supertoken's route handling*/}
+      {/*Note: Auth route is currently overwritten by Supertoken's route handling*!/*/}
+      <Route path="/auth/{mode}" page={AuthPage} name="auth" />
       {/*Note: NotFoundPage is always prerendered*/}
       <Route notfound page={NotFoundPage} />
       <Private unauthenticated={'check-auth'}>

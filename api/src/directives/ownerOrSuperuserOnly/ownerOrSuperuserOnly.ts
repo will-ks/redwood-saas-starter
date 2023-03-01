@@ -1,8 +1,6 @@
 import {
-  AuthenticationError,
   createValidatorDirective,
   ForbiddenError,
-  ValidatorDirectiveFunc,
 } from '@redwoodjs/graphql-server'
 import { getAssertedCurrentUser } from 'src/lib/directive-helpers'
 import { logger } from 'src/lib/logger'
@@ -36,73 +34,76 @@ type ObjectFetcher = keyof typeof OBJECT_FETCHERS
 const isObjectFetcherName = (toCheck: unknown): toCheck is ObjectFetcher =>
   typeof toCheck === 'string' && Object.keys(OBJECT_FETCHERS).includes(toCheck)
 
-const validate: ValidatorDirectiveFunc = async (args) => {
-  const { userIdKey, objectFetcherName } = args.directiveArgs
-  if (typeof userIdKey !== 'string') {
-    logger.error('Expected a string value for directiveArgs.userIdKey')
-    throw new AuthenticationError('Something went wrong, try again later.')
-  }
+const ownerOrSuperuserOnly = createValidatorDirective(schema, async (args) => {
+  try {
+    const { userIdKey, objectFetcherName } = args.directiveArgs
+    if (typeof userIdKey !== 'string') {
+      throw new Error(
+        `Expected a string value for directiveArgs.userIdKey, got ${userIdKey}`
+      )
+    }
 
-  const { userId: currentUserId, roles: currentUserRoles } =
-    getAssertedCurrentUser()
+    const { userId: currentUserId, roles: currentUserRoles } =
+      getAssertedCurrentUser()
 
-  const currentUserIsSuperUser = currentUserRoles.includes(
-    UserRoleType.SuperUser
-  )
-
-  if (currentUserIsSuperUser) {
-    logger.info(
-      `Skipping ownership checks because user ${currentUserId} is superuser`
+    const currentUserIsSuperUser = currentUserRoles.includes(
+      UserRoleType.SuperUser
     )
-    return
-  }
 
-  const objectToCheckOwnershipOf = await (async () => {
-    const previousReturn = args.root // The previous return in the resolver chain
-    if (typeof previousReturn === 'object') {
-      // We're not in a top level query (mutation / query) so we can check the previous return
-      return previousReturn
+    if (currentUserIsSuperUser) {
+      logger.info(
+        `Skipping ownership checks because user ${currentUserId} is superuser`
+      )
+      return
     }
-    // We're in a top level query, so we need to fetch the object from the database.
-    const idToQuery = args.args.id
-    if (typeof idToQuery !== 'string') {
-      logger.error(`Expected a value for args.args.id`)
-      throw new AuthenticationError('Something went wrong, try again later.')
+
+    const objectToCheckOwnershipOf = await (async () => {
+      const previousReturn = args.root // The previous return in the resolver chain
+      if (typeof previousReturn === 'object') {
+        // We're not in a top level query (mutation / query) so we can check the previous return
+        return previousReturn
+      }
+      // We're in a top level query, so we need to fetch the object from the database.
+      const idToQuery = args.args.id
+      if (typeof idToQuery !== 'string') {
+        throw new Error(`Expected a value for args.args.id`)
+      }
+      if (!isObjectFetcherName(objectFetcherName)) {
+        throw new Error(
+          `Couldn't map ${objectFetcherName} to a an object fetcher`
+        )
+      }
+      return OBJECT_FETCHERS[objectFetcherName]({
+        id: idToQuery,
+      })
+    })()
+
+    if (!objectToCheckOwnershipOf) {
+      throw new Error(`Couldn't find an object to check ownership of.`)
     }
-    if (!isObjectFetcherName(objectFetcherName)) {
-      logger.error(`Couldn't map ${objectFetcherName} to a an object fetcher`)
-      throw new AuthenticationError('Something went wrong, try again later.')
+
+    const previousReturnUserId =
+      !!objectToCheckOwnershipOf &&
+      typeof objectToCheckOwnershipOf === 'object' &&
+      userIdKey in objectToCheckOwnershipOf &&
+      (objectToCheckOwnershipOf as { [key: string]: unknown })[userIdKey]
+    if (!previousReturnUserId) {
+      throw new Error(
+        `Object to check ownership doesn't have a value at ${userIdKey}`
+      )
     }
-    return OBJECT_FETCHERS[objectFetcherName]({
-      id: idToQuery,
-    })
-  })()
 
-  if (!objectToCheckOwnershipOf) {
-    logger.error(`Couldn't find an object to check ownership of.`)
-    throw new AuthenticationError('Something went wrong, try again later.')
+    const isOwnedByCurrentUser = previousReturnUserId === currentUserId
+
+    if (isOwnedByCurrentUser) {
+      return
+    }
+
+    throw new Error("Didn't return anything")
+  } catch (error) {
+    logger.error(error)
+    throw new ForbiddenError("You don't have permission to do this")
   }
+})
 
-  const previousReturnUserId =
-    typeof objectToCheckOwnershipOf === 'object' &&
-    userIdKey in objectToCheckOwnershipOf &&
-    (objectToCheckOwnershipOf as { [key: string]: unknown })[userIdKey]
-  if (!previousReturnUserId) {
-    logger.error(
-      `Object to check ownership doesn't have a value at ${userIdKey}`
-    )
-    throw new AuthenticationError('Something went wrong, try again later.')
-  }
-
-  const isOwnedByCurrentUser = previousReturnUserId === currentUserId
-
-  if (isOwnedByCurrentUser) {
-    return
-  }
-
-  throw new ForbiddenError("You don't have permission to do this")
-}
-
-const ownerOrAdminOnly = createValidatorDirective(schema, validate)
-
-export default ownerOrAdminOnly
+export default ownerOrSuperuserOnly
