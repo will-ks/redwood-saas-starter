@@ -1,6 +1,6 @@
 # Redwood SAAS Starter
 
-This project is a starter boilerplate for creating SAAS projects with Redwood.
+This project is a starter boilerplate for creating SAAS projects with Redwood. Currently it is focused on my own personal needs, but it may be useful for others too.
 
 Features:
 - TypeScript
