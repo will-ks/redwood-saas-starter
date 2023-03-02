@@ -1,16 +1,25 @@
 # Redwood SAAS Starter
 
-This project is a starter boilerplate for creating SAAS projects with Redwood. Currently it is focused on my own personal needs, but it may be useful for others too.
+This project is a starter boilerplate for creating SAAS projects with [Redwood](https://redwoodjs.com/). 
 
-Features:
-- TypeScript
-- Personally configured strict ESLint rules
+Redwood provides a fantastic framework for rapidly building full stack React applications. 
+This starter project builds on top of what Redwood offers, adding these opinionated features that are valuable for SAAS projects:
+
+- Strict-mode TypeScript
+- Opinionated strict ESLint rules
 - [Temporal](https://temporal.io/) for workflows
 - [Formance Ledger](https://github.com/formancehq/ledger) for internal transactions
-- [Mantine](https://github.com/mantinedev/mantine) for UI
+- [Mantine](https://github.com/mantinedev/mantine) for UI components
 - [Vanilla Extract](https://github.com/vanilla-extract-css/vanilla-extract) for styling
-- [Supertokens](https://supertokens.com/) for Auth
-- Docker + Docker compose
+- Self-hosted [Supertokens](https://supertokens.com/) for Auth
+- Docker + Docker compose + Nomad for containerisation & orchestration
+- Github actions for CI / CD
+- Role-based access control
+- Organizations / Teams
+- Some pre-designed pages for common features like sign in/up, user profiles and settings
+- Opinionated generator improvements
+
+Currently this project is primarily focused on my own personal needs, but it may be useful for others too.
 
 ## Gettings started
 
