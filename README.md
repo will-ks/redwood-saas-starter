@@ -1,4 +1,4 @@
-# Redwood SAAS Starter
+# 🌲 Redwood SAAS Starter
 
 This project is a starter boilerplate for creating SAAS projects with [Redwood](https://redwoodjs.com/). 
 
