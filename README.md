@@ -25,9 +25,11 @@ This starter project builds on top of what Redwood offers, adding these opiniona
 
 Currently this project is primarily focused on my own personal needs, but it may be useful for others too.
 
-## Gettings started
+# Getting started
 
 The project is built as a [copier](https://copier.readthedocs.io/en/stable/) template. This means you can start a project from the template and easily keep it updated when the starter template is updated.
+
+## Installation
 
 - Install [copier CLI](https://copier.readthedocs.io/en/stable/):
 
@@ -41,7 +43,11 @@ The project is built as a [copier](https://copier.readthedocs.io/en/stable/) tem
 copier git@github.com:will-ks/redwood-saas-starter.git [project-name]
 ```
 
-- To later pull updates:
+The generated project will have its own README.md file (see the template [README.md.jinja](https://github.com/will-ks/redwood-saas-starter/blob/main/README.md.jinja) which gives you instructions on how to use the project.
+
+## Updates
+
+- To pull upsteam updates in to your local project:
 
 ```
 copier update
