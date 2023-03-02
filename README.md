@@ -4,15 +4,17 @@ This project is a starter boilerplate for creating SAAS projects with Redwood. C
 
 Features:
 - TypeScript
-- Personally configured ESLint
-- Temporal for workflows
-- Ledger for internal transactions
-- Mantine for UI
-- Vanilla Extract for styling
-- Supertokens for Auth
+- Personally configured strict ESLint rules
+- [Temporal](https://temporal.io/) for workflows
+- [Formance Ledger](https://github.com/formancehq/ledger) for internal transactions
+- [Mantine](https://github.com/mantinedev/mantine) for UI
+- [Vanilla Extract](https://github.com/vanilla-extract-css/vanilla-extract) for styling
+- [Supertokens](https://supertokens.com/) for Auth
 - Docker + Docker compose
 
 ## Gettings started
+
+The project is built as a [copier](https://copier.readthedocs.io/en/stable/) template. This means you can start a project from the template and easily keep it updated when the starter template is updated.
 
 - Install [copier CLI](https://copier.readthedocs.io/en/stable/):
 
