@@ -18,6 +18,10 @@ This starter project builds on top of what Redwood offers, adding these opiniona
 - Organizations / Teams
 - Some pre-designed pages for common features like sign in/up, user profiles and settings
 - Opinionated generator improvements
+- [coming soon] Payments system
+- [coming soon] Notifications system
+- [coming soon] Commenting system
+- [coming soon] Invites system
 
 Currently this project is primarily focused on my own personal needs, but it may be useful for others too.
 
