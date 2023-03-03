@@ -8,7 +8,6 @@
 // 'src/pages/Admin/BooksPage/BooksPage.js' -> AdminBooksPage
 
 import { Private, Route, Router } from '@redwoodjs/router'
-import HandleUnauthenticatedPage from 'src/pages/HandleUnauthenticatedPage/HandleUnauthenticatedPage'
 import SuperTokens from 'supertokens-auth-react'
 
 import { useAuth } from './auth'
@@ -26,6 +25,8 @@ const Routes = () => {
       {/*Note: NotFoundPage is always prerendered*/}
       <Route notfound page={NotFoundPage} />
       <Private unauthenticated={'check-auth'}>
+        <Route path="/settings/account" page={SettingsAccountPage} name="settingsAccount" />
+        <Route path="/settings" page={SettingsMenuPage} name="settingsMenu" />
         <Route path="/profile/{id:String}" page={ProfilePage} name="profile" />
       </Private>
     </Router>
