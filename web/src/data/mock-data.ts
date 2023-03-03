@@ -18,4 +18,5 @@ export const MOCK_DATA = {
   value: 'example',
   currentUserId: 'exampleId3',
   to: 'example',
+  username: 'exampleUsername',
 }

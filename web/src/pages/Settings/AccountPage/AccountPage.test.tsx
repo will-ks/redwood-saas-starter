@@ -8,7 +8,16 @@ export const mockProps = getPropsMocker({
 })
 
 describe(AccountPage.name, () => {
+  it('throws if rendered without a currentUser', () => {
+    expect(() => {
+      render(<AccountPage {...mockProps()} />)
+    }).toThrow()
+  })
   it('renders successfully', () => {
+    mockCurrentUser({
+      userId: 'example',
+      roles: [],
+    })
     expect(() => {
       render(<AccountPage {...mockProps()} />)
     }).not.toThrow()

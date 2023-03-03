@@ -11,7 +11,7 @@ import { UpdateUser, UpdateUserVariables } from 'types/graphql'
 
 export const QUERY = gql`
   query ChangeUsernameQuery($id: String!) {
-    changeUsername: user(id: $id) {
+    user: user(id: $id) {
       username
     }
   }
@@ -46,7 +46,7 @@ export const Success: FC<
     id: string
     onSuccess?: () => void
   }
-> = ({ changeUsername: { username }, id, onSuccess }) => {
+> = ({ user: { username }, id, onSuccess }) => {
   const [updateUser, { loading, error }] = useMutation<
     UpdateUser,
     UpdateUserVariables

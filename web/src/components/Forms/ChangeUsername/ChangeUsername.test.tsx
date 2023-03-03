@@ -5,6 +5,8 @@ import ChangeUsername from './ChangeUsername'
 
 export const mockProps = getPropsMocker({
   // Add props not covered by included in mock defaults here
+  submitting: false,
+  defaultValues: { username: 'exampleUsername' },
 })
 
 describe(ChangeUsername.name, () => {
