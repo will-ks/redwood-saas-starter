@@ -1,9 +1,12 @@
-import { render, screen } from '@redwoodjs/testing/web'
+import { render } from '@redwoodjs/testing/web'
 import { getPropsMocker } from 'src/lib/mock-helpers'
-import { Loading, Empty, Failure, Success } from './ChangeUsernameCell'
+import { Empty, Failure, Loading, Success } from './ChangeUsernameCell'
 
 export const mockProps = getPropsMocker({
   // Add props not covered by included in mock defaults here
+  user: {
+    username: 'exampleUsername',
+  },
 })
 
 describe('Cell', () => {
