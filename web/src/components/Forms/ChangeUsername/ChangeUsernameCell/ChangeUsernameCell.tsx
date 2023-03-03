@@ -39,7 +39,7 @@ export const Empty: FC = () => <FatalErrorDisplay showHomeButton={false} />
 
 export const Failure: FC<CellFailureProps<ChangeUsernameQueryVariables>> = ({
   error,
-}) => <FatalErrorDisplay showHomeButton={false} />
+}) => <FatalErrorDisplay showHomeButton={false} error={error} />
 
 export const Success: FC<
   CellSuccessProps<ChangeUsernameQuery, ChangeUsernameQueryVariables> & {
