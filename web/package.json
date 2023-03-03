@@ -15,6 +15,8 @@
     "prop-types": "15.8.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-icons": "4.7.1",
+    "react-promise-rejection-handler": "0.1.0",
     "supertokens-auth-react": "0.30",
     "supertokens-web-js": "0.4"
   },

@@ -2,6 +2,7 @@ import { MantineProvider } from '@mantine/core'
 import { ModalsProvider } from '@mantine/modals'
 import { FatalErrorBoundary, RedwoodProvider } from '@redwoodjs/web'
 import { RedwoodApolloProvider } from '@redwoodjs/web/apollo'
+import PromiseRejectionHandler from 'react-promise-rejection-handler'
 
 import FatalErrorPage from 'src/pages/FatalErrorPage'
 import Routes from 'src/Routes'
@@ -11,17 +12,19 @@ import theme from './data/theme'
 
 const App = () => (
   <FatalErrorBoundary page={FatalErrorPage}>
-    <RedwoodProvider titleTemplate="%PageTitle | %AppTitle">
-      <AuthProvider>
-        <MantineProvider theme={theme}>
-          <ModalsProvider>
+    <PromiseRejectionHandler>
+      <RedwoodProvider titleTemplate="%PageTitle | %AppTitle">
+        <AuthProvider>
+          <MantineProvider theme={theme}>
             <RedwoodApolloProvider useAuth={useAuth}>
-              <Routes />
+              <ModalsProvider>
+                <Routes />
+              </ModalsProvider>
             </RedwoodApolloProvider>
-          </ModalsProvider>
-        </MantineProvider>
-      </AuthProvider>
-    </RedwoodProvider>
+          </MantineProvider>
+        </AuthProvider>
+      </RedwoodProvider>
+    </PromiseRejectionHandler>
   </FatalErrorBoundary>
 )
 

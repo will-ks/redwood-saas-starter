@@ -8,11 +8,12 @@ export enum FatalErrorType {
 }
 
 const FatalErrorDisplay: FC<{
-  type: FatalErrorType
-}> = ({ type }) => {
+  type?: FatalErrorType
+  showHomeButton?: boolean
+}> = ({ type = FatalErrorType.Unknown, showHomeButton = true }) => {
   return (
     <Container size="xs" px="xs" py="xs">
-      <Text align="center" color="dimmed" size={220} weight={900}>
+      <Text align="center" color="dimmed" size={120} weight={900}>
         {(() => {
           switch (type) {
             case FatalErrorType.NotFound:
@@ -43,11 +44,13 @@ const FatalErrorDisplay: FC<{
             }
           })()}
         </Text>
-        <Group position="center">
-          <Button variant="subtle" size="md" component={Link} to={''}>
-            Back to the home page
-          </Button>
-        </Group>
+        {showHomeButton && (
+          <Group position="center">
+            <Button variant="subtle" size="md" component={Link} to={''}>
+              Back to the home page
+            </Button>
+          </Group>
+        )}
       </Stack>
     </Container>
   )
