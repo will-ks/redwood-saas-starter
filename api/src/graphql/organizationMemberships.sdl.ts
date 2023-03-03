@@ -1,28 +1,28 @@
 export const schema = gql`
   type OrganizationMembership {
-    id: String!
+    id: UUID!
     createdAt: DateTime!
     updatedAt: DateTime!
     user: User!
-    userId: String!
+    userId: UUID!
     organization: Organization!
-    organizationId: String!
+    organizationId: UUID!
     organizationRoles: [OrganizationRole]!
   }
 
   type Query {
     organizationMemberships: [OrganizationMembership!]! @requireAuth
-    organizationMembership(id: String!): OrganizationMembership @requireAuth
+    organizationMembership(id: SafeString!): OrganizationMembership @requireAuth
   }
 
   input CreateOrganizationMembershipInput {
-    userId: String!
-    organizationId: String!
+    userId: UUID!
+    organizationId: UUID!
   }
 
   input UpdateOrganizationMembershipInput {
-    userId: String
-    organizationId: String
+    userId: UUID
+    organizationId: UUID
   }
 
   type Mutation {
@@ -30,10 +30,10 @@ export const schema = gql`
       input: CreateOrganizationMembershipInput!
     ): OrganizationMembership! @requireAuth
     updateOrganizationMembership(
-      id: String!
+      id: UUID!
       input: UpdateOrganizationMembershipInput!
     ): OrganizationMembership! @requireAuth
-    deleteOrganizationMembership(id: String!): OrganizationMembership!
+    deleteOrganizationMembership(id: UUID!): OrganizationMembership!
       @requireAuth
   }
 `

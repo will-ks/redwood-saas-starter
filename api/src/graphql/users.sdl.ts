@@ -1,6 +1,6 @@
 export const schema = gql`
   type User {
-    id: String!
+    id: UUID!
     createdAt: DateTime! @ownerOrSuperuserOnly(userIdKey: "id")
     updatedAt: DateTime! @ownerOrSuperuserOnly(userIdKey: "id")
     userRoles: [UserRole]! @ownerOrSuperuserOnly(userIdKey: "id")
@@ -12,27 +12,27 @@ export const schema = gql`
 
   type Query {
     users: [User!]! @requireAuth
-    user(id: String!): User @requireAuth
+    user(id: SafeString!): User @requireAuth
   }
 
   input CreateUserInput {
-    authenticationProviderType: String!
-    authenticationProviderId: String!
-    username: String
+    authenticationProviderType: SafeString!
+    authenticationProviderId: SafeString!
+    username: SafeString
   }
 
   input UpdateUserInput {
-    authenticationProviderType: String
-    authenticationProviderId: String
-    username: String
+    authenticationProviderType: SafeString
+    authenticationProviderId: SafeString
+    username: SafeString
   }
 
   type Mutation {
     createUser(input: CreateUserInput!): User! @requireAuth
-    updateUser(id: String!, input: UpdateUserInput!): User!
+    updateUser(id: UUID!, input: UpdateUserInput!): User!
       @requireAuth
       @ownerOrSuperuserOnly(userIdKey: "id", objectFetcherName: "user")
-    deleteUser(id: String!): User!
+    deleteUser(id: UUID!): User!
       @requireAuth
       @ownerOrSuperuserOnly(userIdKey: "id", objectFetcherName: "user")
   }

@@ -10,7 +10,7 @@ import { openModal } from 'src/lib/overlays'
 import useAssertedCurrentUser from 'src/lib/useAssertedCurrentUser'
 
 export const UPDATE_USER = gql`
-  mutation UpdateUser($id: String!, $input: UpdateUserInput!) {
+  mutation UpdateUser($id: UUID!, $input: UpdateUserInput!) {
     updateUser(id: $id, input: $input) {
       id
       username

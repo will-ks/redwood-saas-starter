@@ -1,26 +1,26 @@
 export const schema = gql`
   type OrganizationRole {
-    id: String!
+    id: UUID!
     createdAt: DateTime!
     updatedAt: DateTime!
-    roleType: String!
+    roleType: OrganizationRoleType!
     organizationMembership: OrganizationMembership!
-    organizationMembershipId: String!
+    organizationMembershipId: UUID!
   }
 
   type Query {
     organizationRoles: [OrganizationRole!]! @requireAuth
-    organizationRole(id: String!): OrganizationRole @requireAuth
+    organizationRole(id: SafeString!): OrganizationRole @requireAuth
   }
 
   input CreateOrganizationRoleInput {
-    roleType: String!
-    organizationMembershipId: String!
+    roleType: OrganizationRoleType!
+    organizationMembershipId: UUID!
   }
 
   input UpdateOrganizationRoleInput {
-    roleType: String
-    organizationMembershipId: String
+    roleType: OrganizationRoleType
+    organizationMembershipId: UUID
   }
 
   type Mutation {
@@ -28,9 +28,9 @@ export const schema = gql`
       input: CreateOrganizationRoleInput!
     ): OrganizationRole! @requireAuth
     updateOrganizationRole(
-      id: String!
+      id: UUID!
       input: UpdateOrganizationRoleInput!
     ): OrganizationRole! @requireAuth
-    deleteOrganizationRole(id: String!): OrganizationRole! @requireAuth
+    deleteOrganizationRole(id: UUID!): OrganizationRole! @requireAuth
   }
 `

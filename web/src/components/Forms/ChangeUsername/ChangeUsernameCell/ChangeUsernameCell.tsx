@@ -10,17 +10,8 @@ import type {
 import { UpdateUser, UpdateUserVariables } from 'types/graphql'
 
 export const QUERY = gql`
-  query ChangeUsernameQuery($id: String!) {
+  query ChangeUsernameQuery($id: SafeString!) {
     user: user(id: $id) {
-      username
-    }
-  }
-`
-
-export const UPDATE_USERNAME = gql`
-  mutation UpdateUser($id: String!, $input: UpdateUserInput!) {
-    updateUser(id: $id, input: $input) {
-      id
       username
     }
   }
