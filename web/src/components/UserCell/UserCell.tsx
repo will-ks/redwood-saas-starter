@@ -4,7 +4,7 @@ import ProfileCard from 'src/components/ProfileCard/ProfileCard'
 import type { UserQuery, UserQueryVariables } from 'types/graphql'
 
 export const QUERY = gql`
-  query UserQuery($id: String!) {
+  query UserQuery($id: SafeString!) {
     user: user(id: $id) {
       username
     }
