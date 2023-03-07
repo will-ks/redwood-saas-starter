@@ -1,1 +1,4 @@
 api/types/graphql.d.ts
+web/types/graphql.d.ts
+packages/payments-admin
+packages/payments
