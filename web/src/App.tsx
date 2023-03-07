@@ -4,6 +4,8 @@ import { FatalErrorBoundary, RedwoodProvider } from '@redwoodjs/web'
 import { RedwoodApolloProvider } from '@redwoodjs/web/apollo'
 import PromiseRejectionHandler from 'react-promise-rejection-handler'
 
+import 'ress'
+
 import FatalErrorPage from 'src/pages/FatalErrorPage'
 import Routes from 'src/Routes'
 

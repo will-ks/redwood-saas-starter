@@ -29959,6 +29959,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ress@npm:5.0.2":
+  version: 5.0.2
+  resolution: "ress@npm:5.0.2"
+  checksum: f8ae4e461e84f9cf52af7800ec5b1230e31a520cfc6e3d9f2fc82ac1ff79d1e865d7465a56b00dc05073f85b330bf6b25434f9972a5489c9e98c57d85eeda3a5
+  languageName: node
+  linkType: hard
+
 "restore-cursor@npm:^3.1.0":
   version: 3.1.0
   resolution: "restore-cursor@npm:3.1.0"
@@ -34200,6 +34207,7 @@ __metadata:
     react-dom: 17.0.2
     react-icons: 4.7.1
     react-promise-rejection-handler: 0.1.0
+    ress: 5.0.2
     supertokens-auth-react: 0.30
     supertokens-web-js: 0.4
     vite-plugin-checker: 0.5.5
