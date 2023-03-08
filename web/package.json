@@ -17,6 +17,7 @@
     "react-dom": "17.0.2",
     "react-icons": "4.7.1",
     "react-promise-rejection-handler": "0.1.0",
+    "react-use": "17.4.0",
     "ress": "5.0.2",
     "supertokens-auth-react": "0.30",
     "supertokens-web-js": "0.4"

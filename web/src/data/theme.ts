@@ -1,4 +1,4 @@
-import { MantineThemeBase, MantineThemeOverride } from '@mantine/core'
+import { MantineThemeBase } from '@mantine/core'
 
 // Default mantine theme https://github.com/mantinedev/mantine/blob/master/src/mantine-styles/src/theme/default-theme.ts
 const MANTINE_DEFAULT_THEME: Omit<MantineThemeBase, 'globalStyles'> = {
@@ -289,6 +289,6 @@ const MANTINE_DEFAULT_THEME: Omit<MantineThemeBase, 'globalStyles'> = {
   },
 }
 
-const theme: MantineThemeOverride = { ...MANTINE_DEFAULT_THEME }
+const theme = { ...MANTINE_DEFAULT_THEME }
 
 export default theme

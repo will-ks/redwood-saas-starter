@@ -7,11 +7,13 @@ import {
   Text,
   useMantineTheme,
 } from '@mantine/core'
-import { FC, useState } from 'react'
+import { FC } from 'react'
+import { useAuth } from 'src/auth'
+import ProfileMenuCell from 'src/components/ProfileMenuCell'
 
 const MainLayout: FC = ({ children }) => {
   const theme = useMantineTheme()
-  const [opened, setOpened] = useState(false)
+  const { loading, isAuthenticated, currentUser } = useAuth()
   return (
     <AppShell
       padding={'lg'}
@@ -44,9 +46,15 @@ const MainLayout: FC = ({ children }) => {
           >
             <Group position="apart" style={{ width: '100%' }}>
               <Text>Application header</Text>
-              <Group position="left">
-                <Button variant="subtle">Log In</Button>
-              </Group>
+              {!loading && (
+                <Group position="left">
+                  {currentUser ? (
+                    <ProfileMenuCell id={currentUser.userId} />
+                  ) : (
+                    <Button variant="subtle">Log In</Button>
+                  )}
+                </Group>
+              )}
             </Group>
           </div>
         </Header>

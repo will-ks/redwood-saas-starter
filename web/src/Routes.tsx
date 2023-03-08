@@ -8,6 +8,7 @@
 // 'src/pages/Admin/BooksPage/BooksPage.js' -> AdminBooksPage
 
 import { Private, Route, Router, Set } from '@redwoodjs/router'
+import IsolatedLayout from 'src/layouts/IsolatedLayout/IsolatedLayout'
 import MainLayout from 'src/layouts/MainLayout/MainLayout'
 import SuperTokens from 'supertokens-auth-react'
 
@@ -20,18 +21,21 @@ const Routes = () => {
 
   return (
     <Router useAuth={useAuth}>
-      <Set wrap={[MainLayout]}>
+      <Set wrap={[IsolatedLayout]}>
         <Route path="/check-auth" page={HandleUnauthenticatedPage} name="check-auth" />
+      </Set>
+      <Set wrap={[MainLayout]}>
+        <Route path="/home" page={HomePage} name="home" />
         {/*Note: Auth route is currently overwritten by Supertoken's route handling*!/*/}
         <Route path="/auth/{mode}" page={AuthPage} name="auth" />
-        {/*Note: NotFoundPage is always prerendered*/}
-        <Route notfound page={NotFoundPage} />
         <Private unauthenticated={'check-auth'}>
           <Route path="/settings/account" page={SettingsAccountPage} name="settingsAccount" />
           <Route path="/settings" page={SettingsMenuPage} name="settingsMenu" />
           <Route path="/profile/{id:String}" page={ProfilePage} name="profile" />
         </Private>
       </Set>
+      {/*Note: NotFoundPage is always prerendered, and ignores Sets*/}
+      <Route notfound page={NotFoundPage} />
     </Router>
   )
 }
