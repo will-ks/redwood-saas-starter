@@ -1,4 +1,4 @@
-import { Center, Loader } from '@mantine/core'
+import { Loader } from '@mantine/core'
 import { Redirect, routes } from '@redwoodjs/router'
 import { FC, useEffect } from 'react'
 import { useAuth } from 'src/auth'
@@ -13,11 +13,7 @@ const HandleUnauthenticatedPage: FC = () => {
   if (isAuthenticated) {
     return <Redirect to={routes.home()} />
   }
-  return (
-    <Center style={{ height: '80vh', width: '100%' }}>
-      <Loader size="lg" />
-    </Center>
-  )
+  return <Loader size="lg" />
 }
 
 export default HandleUnauthenticatedPage
