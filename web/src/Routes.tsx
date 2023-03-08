@@ -21,6 +21,7 @@ const Routes = () => {
   return (
     <Router useAuth={useAuth}>
       <Set wrap={[MainLayout]}>
+        <Route path="/home" page={HomePage} name="home" />
         <Route path="/check-auth" page={HandleUnauthenticatedPage} name="check-auth" />
         {/*Note: Auth route is currently overwritten by Supertoken's route handling*!/*/}
         <Route path="/auth/{mode}" page={AuthPage} name="auth" />

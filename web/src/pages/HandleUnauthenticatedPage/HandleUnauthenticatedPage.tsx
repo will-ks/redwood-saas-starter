@@ -1,4 +1,5 @@
-import { MetaTags } from '@redwoodjs/web'
+import { Center, Loader } from '@mantine/core'
+import { Redirect, routes } from '@redwoodjs/router'
 import { FC, useEffect } from 'react'
 import { useAuth } from 'src/auth'
 
@@ -9,15 +10,13 @@ const HandleUnauthenticatedPage: FC = () => {
       logIn()
     }
   }, [isAuthenticated, logIn, loading])
+  if (isAuthenticated) {
+    return <Redirect to={routes.home()} />
+  }
   return (
-    <>
-      <MetaTags title="Loading" description="Loading page" />
-
-      <h1>LoadingPage</h1>
-      <p>
-        Find me in <code>./web/src/pages/LoadingPage/LoadingPage.tsx</code>.
-      </p>
-    </>
+    <Center style={{ height: '80vh', width: '100%' }}>
+      <Loader size="lg" />
+    </Center>
   )
 }
 
