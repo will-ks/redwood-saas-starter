@@ -28,14 +28,14 @@ const Routes = () => {
         <Route path="/home" page={HomePage} name="home" />
         {/*Note: Auth route is currently overwritten by Supertoken's route handling*!/*/}
         <Route path="/auth/{mode}" page={AuthPage} name="auth" />
-        {/*Note: NotFoundPage is always prerendered*/}
-        <Route notfound page={NotFoundPage} />
         <Private unauthenticated={'check-auth'}>
           <Route path="/settings/account" page={SettingsAccountPage} name="settingsAccount" />
           <Route path="/settings" page={SettingsMenuPage} name="settingsMenu" />
           <Route path="/profile/{id:String}" page={ProfilePage} name="profile" />
         </Private>
       </Set>
+      {/*Note: NotFoundPage is always prerendered, and ignores Sets*/}
+      <Route notfound page={NotFoundPage} />
     </Router>
   )
 }
